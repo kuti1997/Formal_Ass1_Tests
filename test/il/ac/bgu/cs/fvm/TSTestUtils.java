@@ -22,6 +22,9 @@ import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
  * Helps building transition systems. Contains some sample transition systems
  * for us to work on.
  *
+ * PDF drawings of some of the systems can be found in the "docs" folder at the
+ * top repository level.
+ * 
  * @author michael
  */
 public class TSTestUtils {

@@ -21,7 +21,6 @@ public class ExtendedVendingMachineBuilder {
 
     public static ProgramGraph build() {
         ProgramGraph pg = FvmFacade.createInstance().createProgramGraph();
-
         String start = "start";
         String select = "select";
 
