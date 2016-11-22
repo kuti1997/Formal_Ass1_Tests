@@ -1,5 +1,6 @@
-package il.ac.bgu.cs.fvm;
+package il.ac.bgu.cs.fvm.ex2;
 
+import il.ac.bgu.cs.fvm.FvmFacade;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +23,8 @@ public class TransitionSystemsProductTests {
 
     FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     // See page 52, Example 2.9 in the book
     public void booking() {
         TransitionSystem<State, Action, AP> bcr = BookingSystemBuilder.buildBCR();
@@ -101,7 +103,8 @@ public class TransitionSystemsProductTests {
 
     }
 
-    @Test // See page 37, Figure 2.4 in the book 
+    @SuppressWarnings("unchecked")
+	@Test // See page 37, Figure 2.4 in the book 
     public void trafficLight() {
         TransitionSystem<String, String, String> ts1 = FvmFacade.createInstance().createTransitionSystem();
 

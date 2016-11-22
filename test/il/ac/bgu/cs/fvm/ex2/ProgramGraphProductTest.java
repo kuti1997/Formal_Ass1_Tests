@@ -1,6 +1,14 @@
-package il.ac.bgu.cs.fvm;
+package il.ac.bgu.cs.fvm.ex2;
 
-import java.util.HashSet;
+import il.ac.bgu.cs.fvm.FvmFacade;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.pgtransition;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Set;
 
 import org.junit.Test;
@@ -13,13 +21,6 @@ import il.ac.bgu.cs.fvm.programgraph.ParserBasedActDef;
 import il.ac.bgu.cs.fvm.programgraph.ParserBasedCondDef;
 import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.pgtransition;
-import static org.junit.Assert.assertEquals;
 
 public class ProgramGraphProductTest {
 
@@ -27,23 +28,15 @@ public class ProgramGraphProductTest {
 
     @Test
     // See Figure 2.9 and Figure 2.10
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void peterson() throws Exception {
         ProgramGraph pg1 = PetersonProgramGraphBuilder.build(1);
         ProgramGraph pg2 = PetersonProgramGraphBuilder.build(2);
 
         ProgramGraph pg = fvmFacadeImpl.interleave(pg1, pg2);
 
-        Set<ActionDef> ad = new HashSet<ActionDef>() {
-            {
-                add(new ParserBasedActDef());
-            }
-        };
-
-        Set<ConditionDef> cd = new HashSet<ConditionDef>() {
-            {
-                add(new ParserBasedCondDef());
-            }
-        };
+        Set<ActionDef> ad = set(new ParserBasedActDef());
+		Set<ConditionDef> cd = set(new ParserBasedCondDef());
 
         assertEquals(set(p("noncrit1", "noncrit2"), p("wait1", "noncrit2"), p("noncrit1", "crit2"), p("crit1", "crit2"), p("wait1", "crit2"),
                          p("crit1", "noncrit2"), p("crit1", "wait2"), p("wait1", "wait2"), p("noncrit1", "wait2")), pg.getLocations());
@@ -123,7 +116,8 @@ public class ProgramGraphProductTest {
     }
 
     // See Page 43 Figure 2.6
-    @Test
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@Test
     public void semaphorebased() throws Exception {
         ProgramGraph pg1 = SemaphoreBasedMutualExclusionBuilder.build(1);
         ProgramGraph pg2 = SemaphoreBasedMutualExclusionBuilder.build(2);

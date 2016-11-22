@@ -1,25 +1,30 @@
-package il.ac.bgu.cs.fvm;
+package il.ac.bgu.cs.fvm.ex2;
+
+import il.ac.bgu.cs.fvm.FvmFacade;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
+import static java.util.Arrays.asList;
+import static junit.framework.TestCase.assertEquals;
+
+import java.util.LinkedList;
+import java.util.List;
 
 import org.junit.Test;
 
 import il.ac.bgu.cs.fvm.circuits.Circuit;
 import il.ac.bgu.cs.fvm.examples.ExampleCircuit;
+import il.ac.bgu.cs.fvm.impl.FvmFacadeImpl;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
 import il.ac.bgu.cs.fvm.util.Pair;
-import static java.util.Arrays.asList;
-import java.util.LinkedList;
-import java.util.List;
-import static junit.framework.TestCase.assertEquals;
 
 public class CircuitTest {
 
     FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
 
-    @Test
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@Test
     public void test1() throws Exception {
         Circuit c = new ExampleCircuit();
 
@@ -27,8 +32,8 @@ public class CircuitTest {
 
         assertEquals(
                 set(p(seq(true), seq(true)),
-                    p(seq(true), seq(false)),
                     p(seq(false), seq(true)),
+                    p(seq(true), seq(false)),
                     p(seq(false), seq(false))
                 ), ts.getStates());
 
@@ -48,8 +53,8 @@ public class CircuitTest {
                 transition(p(seq(false), seq(true)), seq(true), p(seq(true), seq(true))),
                 transition(p(seq(false), seq(false)), seq(true), p(seq(false), seq(true))),
                 transition(p(seq(true), seq(false)), seq(true), p(seq(true), seq(true))),
-                transition(p(seq(false), seq(false)), seq(false), p(seq(false), seq(false))),
                 transition(p(seq(false), seq(true)), seq(false), p(seq(true), seq(false))),
+                transition(p(seq(false), seq(false)), seq(false), p(seq(false), seq(false))),
                 transition(p(seq(true), seq(false)), seq(false), p(seq(true), seq(false))),
                 transition(p(seq(true), seq(true)), seq(true), p(seq(true), seq(true))),
                 transition(p(seq(true), seq(true)), seq(false), p(seq(true), seq(false)))
@@ -72,11 +77,13 @@ public class CircuitTest {
                 ts.getLabel(p(seq(false), seq(false))));
     }
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public void test2() throws Exception {
         Circuit c;
         c = new Circuit() {
 
+            @Override
             public List<Boolean> updateRegisters(List<Boolean> registers,
                                                  List<Boolean> inputs) {
                 return registers;
@@ -89,23 +96,23 @@ public class CircuitTest {
             }
 
             @Override
-            public List getInputPortNames() {
+            public List<String> getInputPortNames() {
                 return asList("x1", "x2");
             }
 
             @Override
-            public List getRegisterNames() {
+            public List<String> getRegisterNames() {
                 return asList("r1", "r2");
             }
 
             @Override
-            public List getOutputPortNames() {
+            public List<String> getOutputPortNames() {
                 return asList("y1", "y2");
             }
         };
 
         TransitionSystem<Pair<List<Boolean>, List<Boolean>>, List<Boolean>, Object> ts;
-        ts = FvmFacade.createInstance().transitionSystemFromCircuit(c);
+        ts = new FvmFacadeImpl().transitionSystemFromCircuit(c);
 
         assertEquals(set(p(seq(false, false), seq(true, false)),
                          p(seq(false, false), seq(false, false)),
@@ -208,7 +215,8 @@ public class CircuitTest {
                      ts.getLabel(p(seq(false, false), seq(false, true))));
     }
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public void test3() throws Exception {
         Circuit cc;
         cc = new Circuit() {
@@ -257,23 +265,23 @@ public class CircuitTest {
             }
 
             @Override
-            public List getInputPortNames() {
+            public List<String> getInputPortNames() {
                 return asList("inc");
             }
 
             @Override
-            public List getRegisterNames() {
+            public List<String> getRegisterNames() {
                 return asList("r1", "r2", "r3");
             }
 
             @Override
-            public List getOutputPortNames() {
+            public List<String> getOutputPortNames() {
                 return asList("odd");
             }
         };
 
         TransitionSystem<Pair<List<Boolean>, List<Boolean>>, List<Boolean>, Object> ts;
-        ts = FvmFacade.createInstance().transitionSystemFromCircuit(cc);
+        ts = new FvmFacadeImpl().transitionSystemFromCircuit(cc);
 
         assertEquals(set(p(seq(false, false, false), seq(true)),
                          p(seq(false, false, true), seq(false)),

@@ -1,62 +1,108 @@
 package il.ac.bgu.cs.fvm;
 
+import static il.ac.bgu.cs.fvm.AutTsProductTests.Actions.Switch;
+import static il.ac.bgu.cs.fvm.AutTsProductTests.AutomatonStates.Q0;
+import static il.ac.bgu.cs.fvm.AutTsProductTests.AutomatonStates.Q1;
+import static il.ac.bgu.cs.fvm.AutTsProductTests.AutomatonStates.Q2;
+import static il.ac.bgu.cs.fvm.AutTsProductTests.Lights.Green;
+import static il.ac.bgu.cs.fvm.AutTsProductTests.Lights.Off;
+import static il.ac.bgu.cs.fvm.AutTsProductTests.Lights.Red;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
+import static org.junit.Assert.assertEquals;
+
 import java.util.Set;
 
 import org.junit.Test;
 
 import il.ac.bgu.cs.fvm.automata.Automaton;
-import il.ac.bgu.cs.fvm.transitionsystem.Transition;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
-
-import static org.junit.Assert.assertEquals;
-import static il.ac.bgu.cs.fvm.AutTsProductTests.Actions.*;
-import static il.ac.bgu.cs.fvm.AutTsProductTests.Lights.*;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.*;
-import static il.ac.bgu.cs.fvm.AutTsProductTests.AutomatonStates.*;
 import il.ac.bgu.cs.fvm.util.Pair;
+import il.ac.bgu.cs.fvm.util.codeprinter.TsPrinter;
 
 public class AutTsProductTests {
-    
-    public enum Lights{ Off, Green, Red }
-    public enum Actions{ Switch }
-    public enum AutomatonStates {Q0, Q1, Q2}
-    
-	FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
 
-	@Test
-	public void autTimesTs() {
-		TransitionSystem ts1 = buildTransitionSystem1();
-		TransitionSystem ts2 = buildTransitionSystem2();
-		Automaton aut = buildAutomaton();
-
-		TransitionSystem comb1 = fvmFacadeImpl.product(ts1, aut);
-		TransitionSystem expected1 = expected1();
-
-		assertEquals(expected1.getInitialStates(), comb1.getInitialStates());
-		assertEquals(expected1.getStates(), comb1.getStates());
-		assertEquals(expected1.getTransitions(), comb1.getTransitions());
-		assertEquals(expected1.getActions(), comb1.getActions());
-		assertEquals(expected1.getAtomicPropositions(), comb1.getAtomicPropositions());
-		assertEquals(expected1.getLabelingFunction(), comb1.getLabelingFunction());
-
-		TransitionSystem comb2 = fvmFacadeImpl.product(ts2, aut);
-		TransitionSystem expected2 = expected2();
-
-		assertEquals(expected2.getInitialStates(), comb2.getInitialStates());
-		assertEquals(expected2.getStates(), comb2.getStates());
-		assertEquals(expected2.getTransitions(), comb2.getTransitions());
-		assertEquals(expected2.getActions(), comb2.getActions());
-		assertEquals(expected2.getAtomicPropositions(), comb2.getAtomicPropositions());
-		assertEquals(expected2.getLabelingFunction(), comb2.getLabelingFunction());
+	public enum Lights {
+		Off, Green, Red
 	}
 
-	private Automaton<AutomatonStates> buildAutomaton() {
-		Automaton<AutomatonStates> aut = new Automaton();
+	public enum Actions {
+		Switch
+	}
+
+	public enum AutomatonStates {
+		Q0, Q1, Q2
+	}
+
+	final TsPrinter tsPrinter = new TsPrinter() {
+		{
+			setClassPrinter(Actions.class, (obj, tsp, out) -> {
+				out.print(obj.name());
+			});
+
+			setClassPrinter(Lights.class, (obj, tsp, out) -> {
+				out.print(obj.name());
+			});
+
+			setClassPrinter(AutomatonStates.class, (obj, tsp, out) -> {
+				out.print(obj.name());
+			});
+
+		}
+	};
+
+	FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
+
+	@SuppressWarnings("unchecked")
+	@Test
+	public void autTimesTs() {
+		TransitionSystem<Lights, Actions, String> ts1 = buildTransitionSystem1();
+		TransitionSystem<Lights, Actions, String> ts2 = buildTransitionSystem2();
+		Automaton<AutomatonStates, String> aut = buildAutomaton();
+
+		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> comb1 = fvmFacadeImpl.product(ts1, aut);
+
+		assertEquals(set(p(Green, Q0), p(Red, Q1), p(Red, Q2), p(Green, Q2), p(Red, Q0)), comb1.getStates());
+		assertEquals(set(p(Red, Q1), p(Red, Q0)), comb1.getInitialStates());
+		assertEquals(set(Switch), comb1.getActions());
+		assertEquals(set(Q2, Q0, Q1), comb1.getAtomicPropositions());
+		assertEquals(
+				set(transition(p(Green, Q0), Switch, p(Red, Q0)), transition(p(Green, Q0), Switch, p(Red, Q1)), transition(p(Red, Q2), Switch, p(Green, Q2)), transition(p(Green, Q2), Switch, p(Red, Q2)), transition(p(Red, Q1), Switch, p(Green, Q2)), transition(p(Red, Q0), Switch, p(Green, Q0))),
+				comb1.getTransitions());
+		assertEquals(set(Q0), comb1.getLabel(p(Green, Q0)));
+		assertEquals(set(Q1), comb1.getLabel(p(Red, Q1)));
+		assertEquals(set(Q2), comb1.getLabel(p(Red, Q2)));
+		assertEquals(set(Q2), comb1.getLabel(p(Green, Q2)));
+		assertEquals(set(Q0), comb1.getLabel(p(Red, Q0)));
+
+		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> ts = fvmFacadeImpl.product(ts2, aut);
+
+		assertEquals(set(p(Green, Q0), p(Off, Q2), p(Off, Q0), p(Red, Q1), p(Red, Q2), p(Green, Q2), p(Red, Q0), p(Off, Q1)), ts.getStates());
+		assertEquals(set(p(Red, Q1), p(Red, Q0)), ts.getInitialStates());
+		assertEquals(set(Switch), ts.getActions());
+		assertEquals(set(Q2, Q0, Q1), ts.getAtomicPropositions());
+		assertEquals(set(transition(p(Off, Q1), Switch, p(Red, Q1)), transition(p(Green, Q0), Switch, p(Red, Q1)), transition(p(Off, Q0), Switch, p(Red, Q1)), transition(p(Red, Q2), Switch, p(Green, Q2)), transition(p(Green, Q2), Switch, p(Red, Q2)), transition(p(Red, Q1), Switch, p(Green, Q2)),
+				transition(p(Red, Q2), Switch, p(Off, Q2)), transition(p(Red, Q1), Switch, p(Off, Q1)), transition(p(Off, Q2), Switch, p(Red, Q2)), transition(p(Green, Q0), Switch, p(Red, Q0)), transition(p(Red, Q0), Switch, p(Green, Q0)), transition(p(Red, Q0), Switch, p(Off, Q0)),
+				transition(p(Off, Q0), Switch, p(Red, Q0)), transition(p(Red, Q0), Switch, p(Off, Q1))), ts.getTransitions());
+		assertEquals(set(Q0), ts.getLabel(p(Green, Q0)));
+		assertEquals(set(Q2), ts.getLabel(p(Off, Q2)));
+		assertEquals(set(Q0), ts.getLabel(p(Off, Q0)));
+		assertEquals(set(Q1), ts.getLabel(p(Red, Q1)));
+		assertEquals(set(Q2), ts.getLabel(p(Red, Q2)));
+		assertEquals(set(Q2), ts.getLabel(p(Green, Q2)));
+		assertEquals(set(Q0), ts.getLabel(p(Red, Q0)));
+		assertEquals(set(Q1), ts.getLabel(p(Off, Q1)));
+
+	}
+
+	private Automaton<AutomatonStates, String> buildAutomaton() {
+		Automaton<AutomatonStates, String> aut = new Automaton<>();
 
 		Set<String> notRedAndNotGreen = set();
-		Set<String> redAndNotGreen    = set("red");
-		Set<String> greenAndNotRed    = set("green");
-		Set<String> redAndGreen       = set("red", "green");
+		Set<String> redAndNotGreen = set("red");
+		Set<String> greenAndNotRed = set("green");
+		Set<String> redAndGreen = set("red", "green");
 
 		aut.addTransition(Q0, notRedAndNotGreen, Q0);
 		aut.addTransition(Q0, redAndNotGreen, Q0);
@@ -82,8 +128,8 @@ public class AutTsProductTests {
 		return aut;
 	}
 
-	private TransitionSystem<Lights,Actions,String> buildTransitionSystem1() {
-		TransitionSystem<Lights,Actions,String> ts = fvmFacadeImpl.createTransitionSystem();
+	private TransitionSystem<Lights, Actions, String> buildTransitionSystem1() {
+		TransitionSystem<Lights, Actions, String> ts = fvmFacadeImpl.createTransitionSystem();
 
 		ts.addState(Green);
 		ts.addState(Red);
@@ -103,8 +149,8 @@ public class AutTsProductTests {
 		return ts;
 	}
 
-	private TransitionSystem<Lights,Actions,String> buildTransitionSystem2() {
-		TransitionSystem<Lights,Actions,String> ts = fvmFacadeImpl.createTransitionSystem();
+	private TransitionSystem<Lights, Actions, String> buildTransitionSystem2() {
+		TransitionSystem<Lights, Actions, String> ts = fvmFacadeImpl.createTransitionSystem();
 
 		ts.addStates(Off, Red, Green);
 		ts.addInitialState(Red);
@@ -115,105 +161,12 @@ public class AutTsProductTests {
 		ts.addTransitionFrom(Red).action(Switch).to(Off);
 		ts.addTransitionFrom(Off).action(Switch).to(Red);
 
-		ts.addAtomicProposition("Green");
-		ts.addAtomicProposition("Red");
+		ts.addAtomicProposition("green");
+		ts.addAtomicProposition("red");
 
-		ts.addToLabel(Green, "Green");
-		ts.addToLabel(Red, "Red");
+		ts.addToLabel(Green, "green");
+		ts.addToLabel(Red, "red");
 		return ts;
-	}
-
-	TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> expected1() {
-		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> ts = fvmFacadeImpl.createTransitionSystem();
-
-		Pair<Lights, AutomatonStates> gr2 = new Pair<>(Green,Q2);
-		Pair<Lights, AutomatonStates> gr0 = new Pair<>(Green,Q0);
-		Pair<Lights, AutomatonStates> rd2 = new Pair<>(Red,Q2);
-		Pair<Lights, AutomatonStates> rd1 = new Pair<>(Red,Q1);
-		Pair<Lights, AutomatonStates> rd0 = new Pair<>(Red,Q0);
-
-		ts.addStates(gr2, gr0, rd2, rd1, rd0);
-		ts.addInitialState(rd1);
-		ts.addInitialState(rd0);
-
-		ts.addAction(Switch);
-
-		ts.addTransition(new Transition(gr0, Switch, rd1));
-		ts.addTransition(new Transition(gr2, Switch, rd2));
-		ts.addTransition(new Transition(gr0, Switch, rd0));
-		ts.addTransition(new Transition(rd0, Switch, gr0));
-		ts.addTransition(new Transition(rd2, Switch, gr2));
-		ts.addTransition(new Transition(rd1, Switch, gr2));
-
-		ts.addAtomicProposition("Q1");
-		ts.addAtomicProposition("Q2");
-		ts.addAtomicProposition("Q0");
-
-		ts.addToLabel(gr2, "Q2");
-		ts.addToLabel(gr0, "Q0");
-		ts.addToLabel(rd2, "Q2");
-		ts.addToLabel(rd1, "Q1");
-		ts.addToLabel(rd0, "Q0");
-
-		return ts;
-
-	}
-
-	TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> expected2() {
-		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> ts = fvmFacadeImpl.createTransitionSystem();
-
-		Pair<Lights, AutomatonStates> gr2 = new Pair<>(Green,Q2);
-		Pair<Lights, AutomatonStates> gr0 = new Pair<>(Green,Q0);
-		Pair<Lights, AutomatonStates> of2 = new Pair<>(Off,Q2);
-		Pair<Lights, AutomatonStates> rd2 = new Pair<>(Red,Q2);
-		Pair<Lights, AutomatonStates> of0 = new Pair<>(Off,Q0);
-		Pair<Lights, AutomatonStates> of1 = new Pair<>(Off,Q1);
-		Pair<Lights, AutomatonStates> rd1 = new Pair<>(Red,Q1);
-		Pair<Lights, AutomatonStates> rd0 = new Pair<>(Red,Q0);
-
-		ts.addState(gr2);
-		ts.addState(gr0);
-		ts.addState(of2);
-		ts.addState(rd2);
-		ts.addState(of0);
-		ts.addState(of1);
-		ts.addState(rd1);
-		ts.addState(rd0);
-
-		ts.addInitialState(rd1);
-		ts.addInitialState(rd0);
-
-		ts.addAction(Switch);
-
-		ts.addTransition(new Transition(rd1, Switch, of1));
-		ts.addTransition(new Transition(rd1, Switch, gr2));
-		ts.addTransition(new Transition(rd0, Switch, of0));
-		ts.addTransition(new Transition(rd0, Switch, gr0));
-		ts.addTransition(new Transition(rd0, Switch, of1));
-		ts.addTransition(new Transition(rd2, Switch, of2));
-		ts.addTransition(new Transition(rd2, Switch, gr2));
-		ts.addTransition(new Transition(gr0, Switch, rd0));
-		ts.addTransition(new Transition(gr0, Switch, rd1));
-		ts.addTransition(new Transition(of0, Switch, rd1));
-		ts.addTransition(new Transition(of0, Switch, rd0));
-		ts.addTransition(new Transition(gr2, Switch, rd2));
-		ts.addTransition(new Transition(of1, Switch, rd1));
-		ts.addTransition(new Transition(of2, Switch, rd2));
-
-		ts.addAtomicProposition("Q1");
-		ts.addAtomicProposition("Q2");
-		ts.addAtomicProposition("Q0");
-
-		ts.addToLabel(gr2, "Q2");
-		ts.addToLabel(gr0, "Q0");
-		ts.addToLabel(of2, "Q2");
-		ts.addToLabel(rd2, "Q2");
-		ts.addToLabel(of0, "Q0");
-		ts.addToLabel(of1, "Q1");
-		ts.addToLabel(rd1, "Q1");
-		ts.addToLabel(rd0, "Q0");
-		return ts;
-
 	}
 
 }

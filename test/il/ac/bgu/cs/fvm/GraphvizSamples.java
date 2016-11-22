@@ -5,7 +5,8 @@ import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.GraphvizPainter;
 
 /**
- *
+ * Use this class to draw transition systems using Graphviz.
+ * See {@linkplain http://graphviz.org} on usage etc.
  */
 public class GraphvizSamples {
 

@@ -1,5 +1,7 @@
-package il.ac.bgu.cs.fvm;
+package il.ac.bgu.cs.fvm.ex1;
 
+import il.ac.bgu.cs.fvm.FvmFacade;
+import il.ac.bgu.cs.fvm.TSTestUtils;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;

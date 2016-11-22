@@ -1,11 +1,20 @@
-package il.ac.bgu.cs.fvm;
+package il.ac.bgu.cs.fvm.ex2;
 
+import il.ac.bgu.cs.fvm.FvmFacade;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
 import static java.util.Arrays.asList;
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.junit.Test;
 import il.ac.bgu.cs.fvm.examples.CollatzProgramGraphBuilder;
 import il.ac.bgu.cs.fvm.examples.ExtendedVendingMachineBuilder;
+import il.ac.bgu.cs.fvm.examples.HillaryTrumpCounting;
 import il.ac.bgu.cs.fvm.programgraph.ActionDef;
 import il.ac.bgu.cs.fvm.programgraph.ConditionDef;
 import il.ac.bgu.cs.fvm.programgraph.PGTransition;
@@ -13,17 +22,14 @@ import il.ac.bgu.cs.fvm.programgraph.ParserBasedActDef;
 import il.ac.bgu.cs.fvm.programgraph.ParserBasedCondDef;
 import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
-import static org.junit.Assert.assertEquals;
+import il.ac.bgu.cs.fvm.util.Pair;
 
 public class ProgramGraphTest {
 
     FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public void debug() throws Exception {
         ProgramGraph<String, String> pg = fvmFacadeImpl.createProgramGraph();
 
@@ -41,12 +47,12 @@ public class ProgramGraphTest {
         Set<ConditionDef> cond = new HashSet<>();
         cond.add(new ParserBasedCondDef());
 
-        pg.addTransition(new PGTransition(l1, "x>z", "x:=(x+y) % 5", l2));
-        pg.addTransition(new PGTransition(l2, "", "z:=(z-y) % 5", l1));
+        pg.addTransition(new PGTransition<String, String>(l1, "x>z", "x:=(x+y) % 5", l2));
+        pg.addTransition(new PGTransition<String, String>(l2, "", "z:=(z-y) % 5", l1));
 
         pg.addInitalization(asList("x:=1", "y:=2", "z:=0"));
 
-        TransitionSystem ts = fvmFacadeImpl.transitionSystemFromProgramGraph(pg, effect, cond);
+        TransitionSystem<Pair<String, Map<String, Object>>, String, String> ts = fvmFacadeImpl.transitionSystemFromProgramGraph(pg, effect, cond);
 
         assertEquals(set(p("L1", map(p("x", 1), p("y", 2), p("z", 0))),
                          p("L1", map(p("x", 3), p("y", 2), p("z", 3))),
@@ -68,7 +74,8 @@ public class ProgramGraphTest {
 
     }
 
-    @Test
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	@Test
     public void soda() throws Exception {
         ProgramGraph pg = ExtendedVendingMachineBuilder.build();
 
@@ -156,7 +163,7 @@ public class ProgramGraphTest {
 
     }
 
-    @SuppressWarnings("serial")
+    @SuppressWarnings({ "serial", "unchecked", "rawtypes" })
     @Test
     public void collatz() throws Exception {
         ProgramGraph pg = CollatzProgramGraphBuilder.build();
@@ -214,7 +221,8 @@ public class ProgramGraphTest {
         assertEquals(set("x = 16"), ts.getLabel(p("running", map(p("x", 16)))));
     }
 
-    @Test
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Test
     public void runningCounter() throws Exception {
         ProgramGraph<String, String> pg = fvmFacadeImpl.createProgramGraph();
 
@@ -400,6 +408,15 @@ public class ProgramGraphTest {
         assertEquals(set("x = 6"), ts.getLabel(p("S", map(p("x", 6)))));
         assertEquals(set("x = 7"), ts.getLabel(p("S", map(p("x", 7)))));
 
+    }
+    
+    
+    public void electorsCounting() throws Exception {
+        ProgramGraph<String, String> pg = HillaryTrumpCounting.buildSmall();
+        TransitionSystem<Pair<String, Map<String, Object>>, String, String> ts = fvmFacadeImpl.transitionSystemFromProgramGraph(pg, set(new ParserBasedActDef()), set(new ParserBasedCondDef()));
+        
+        assertEquals(29705, ts.getStates().size());
+        assertEquals(235110, ts.getTransitions().size());
     }
 
 }

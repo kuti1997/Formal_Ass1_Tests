@@ -1,12 +1,13 @@
-package il.ac.bgu.cs.fvm;
+package il.ac.bgu.cs.fvm.ex1;
 
-import static il.ac.bgu.cs.fvm.TransitionSystemTest.AP.P;
-import static il.ac.bgu.cs.fvm.TransitionSystemTest.AP.Q;
-import static il.ac.bgu.cs.fvm.TransitionSystemTest.Actions.A1;
-import static il.ac.bgu.cs.fvm.TransitionSystemTest.Actions.A3;
-import static il.ac.bgu.cs.fvm.TransitionSystemTest.States.S1;
-import static il.ac.bgu.cs.fvm.TransitionSystemTest.States.S2;
-import static il.ac.bgu.cs.fvm.TransitionSystemTest.States.S3;
+import il.ac.bgu.cs.fvm.FvmFacade;
+import static il.ac.bgu.cs.fvm.ex1.TransitionSystemTest.AP.P;
+import static il.ac.bgu.cs.fvm.ex1.TransitionSystemTest.AP.Q;
+import static il.ac.bgu.cs.fvm.ex1.TransitionSystemTest.Actions.A1;
+import static il.ac.bgu.cs.fvm.ex1.TransitionSystemTest.Actions.A3;
+import static il.ac.bgu.cs.fvm.ex1.TransitionSystemTest.States.S1;
+import static il.ac.bgu.cs.fvm.ex1.TransitionSystemTest.States.S2;
+import static il.ac.bgu.cs.fvm.ex1.TransitionSystemTest.States.S3;
 
 import org.junit.Before;
 import org.junit.Test;

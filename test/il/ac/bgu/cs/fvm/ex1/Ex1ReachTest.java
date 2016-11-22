@@ -1,5 +1,6 @@
-package il.ac.bgu.cs.fvm;
+package il.ac.bgu.cs.fvm.ex1;
 
+import il.ac.bgu.cs.fvm.FvmFacade;
 import static il.ac.bgu.cs.fvm.TSTestUtils.makeBranchingTs;
 import static il.ac.bgu.cs.fvm.TSTestUtils.makeCircularTs;
 import static il.ac.bgu.cs.fvm.TSTestUtils.makeCircularTsWithReset;
