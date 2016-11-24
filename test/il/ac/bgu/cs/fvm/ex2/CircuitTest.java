@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import il.ac.bgu.cs.fvm.circuits.Circuit;
 import il.ac.bgu.cs.fvm.examples.ExampleCircuit;
-import il.ac.bgu.cs.fvm.impl.FvmFacadeImpl;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.Pair;
 
@@ -112,7 +111,7 @@ public class CircuitTest {
         };
 
         TransitionSystem<Pair<List<Boolean>, List<Boolean>>, List<Boolean>, Object> ts;
-        ts = new FvmFacadeImpl().transitionSystemFromCircuit(c);
+        ts = fvmFacadeImpl.transitionSystemFromCircuit(c);
 
         assertEquals(set(p(seq(false, false), seq(true, false)),
                          p(seq(false, false), seq(false, false)),
@@ -281,7 +280,7 @@ public class CircuitTest {
         };
 
         TransitionSystem<Pair<List<Boolean>, List<Boolean>>, List<Boolean>, Object> ts;
-        ts = new FvmFacadeImpl().transitionSystemFromCircuit(cc);
+        ts = fvmFacadeImpl.transitionSystemFromCircuit(cc);
 
         assertEquals(set(p(seq(false, false, false), seq(true)),
                          p(seq(false, false, true), seq(false)),
