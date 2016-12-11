@@ -1,18 +1,17 @@
 package il.ac.bgu.cs.fvm.ex1;
 
-import il.ac.bgu.cs.fvm.FvmFacade;
-import il.ac.bgu.cs.fvm.FvmFacade;
 import static il.ac.bgu.cs.fvm.TSTestUtils.makeLinearTs;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import il.ac.bgu.cs.fvm.FvmFacade;
 import il.ac.bgu.cs.fvm.exceptions.FVMException;
 import il.ac.bgu.cs.fvm.exceptions.InvalidInitialStateException;
 import il.ac.bgu.cs.fvm.exceptions.InvalidLablingPairException;
 import il.ac.bgu.cs.fvm.transitionsystem.Transition;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
-import static org.junit.Assert.fail;
 
 /**
  * Testing the consistency of a transition system implementation.

@@ -12,20 +12,8 @@ import static il.ac.bgu.cs.fvm.TSTestUtils.States.b;
 import static il.ac.bgu.cs.fvm.TSTestUtils.States.c;
 import static il.ac.bgu.cs.fvm.TSTestUtils.States.d;
 
-import java.io.StringReader;
-import java.util.Map;
-import java.util.Set;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Node;
-import org.w3c.dom.bootstrap.DOMImplementationRegistry;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSSerializer;
-import org.xml.sax.InputSource;
 
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 
