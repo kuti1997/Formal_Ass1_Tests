@@ -76,12 +76,12 @@ public class ChannelSystemTest {
 	@Test
 	public void test10() throws Exception {
 		ProgramGraph<String, String> pg1 = fvmFacadeImpl.createProgramGraph();
-		
+
 		pg1.addLocation("l1");
 		pg1.addLocation("l2");
 
 		pg1.addInitialLocation("l1");
-	
+
 		pg1.addInitalization(seq("x:=0"));
 
 		pg1.addTransition(new PGTransition<>("l1", "true", "C?x", "l2"));
@@ -93,36 +93,27 @@ public class ChannelSystemTest {
 		pg2.addLocation("l2");
 
 		pg2.addInitialLocation("l1");
-	
-		pg2.addInitalization(seq("y:=0","y:=1"));
+
+		pg2.addInitalization(seq("y:=0"));
+		pg2.addInitalization(seq("y:=1"));
 
 		pg2.addTransition(new PGTransition<>("l1", "size(C)<5", "C!y", "l2"));
 		pg2.addTransition(new PGTransition<>("l2", "true", "C?y", "l1"));
-		
-		
-		ChannelSystem<String, String> cs = new ChannelSystem<>(seq(pg1,pg2));
-		
+
+		ChannelSystem<String, String> cs = new ChannelSystem<>(seq(pg1, pg2));
+
 		TransitionSystem<Pair<List<String>, Map<String, Object>>, String, String> ts = fvmFacadeImpl
 				.transitionSystemFromChannelSystem(cs);
-		
-		
-		assertEquals(set(p(seq("l1", "l1"), map(p("x",0), p("y",1))), p(seq("l1", "l2"), map(p("x",1), p("y",1), p("C",seq(1)))), p(seq("l1", "l2"), map(p("x",0), p("y",1), p("C",seq(1)))), p(seq("l2", "l2"), map(p("x",1), p("y",1), p("C",seq()))), p(seq("l1", "l1"), map(p("x",1), p("y",1), p("C",seq()))), 
-		    p(seq("l1", "l1"), map(p("x",0), p("y",1), p("C",seq())))),ts.getStates());
-		assertEquals(set(p(seq("l1", "l1"), map(p("x",0), p("y",1)))),ts.getInitialStates());
-		assertEquals(set("C!x", "C!y", "C?y", "C?x"),ts.getActions());
-		assertEquals(set("C = []", "x = 1", "x = 0", "y = 1", "C = [1]"
-		    ),ts.getAtomicPropositions());
-		assertEquals(set(transition(p(seq("l1", "l2"), map(p("x",1), p("y",1), p("C",seq(1)))), "C?x", p(seq("l2", "l2"), map(p("x",1), p("y",1), p("C",seq())))), transition(p(seq("l1", "l2"), map(p("x",0), p("y",1), p("C",seq(1)))), "C?x", p(seq("l2", "l2"), map(p("x",1), p("y",1), p("C",seq())))), transition(p(seq("l1", "l2"), map(p("x",0), p("y",1), p("C",seq(1)))), "C?y", p(seq("l1", "l1"), map(p("x",0), p("y",1), p("C",seq())))), transition(p(seq("l1", "l2"), map(p("x",1), p("y",1), p("C",seq(1)))), "C?y", p(seq("l1", "l1"), map(p("x",1), p("y",1), p("C",seq())))), transition(p(seq("l1", "l1"), map(p("x",0), p("y",1))), "C!y", p(seq("l1", "l2"), map(p("x",0), p("y",1), p("C",seq(1))))), 
-		    transition(p(seq("l1", "l1"), map(p("x",0), p("y",1), p("C",seq()))), "C!y", p(seq("l1", "l2"), map(p("x",0), p("y",1), p("C",seq(1))))), transition(p(seq("l1", "l1"), map(p("x",1), p("y",1), p("C",seq()))), "C!y", p(seq("l1", "l2"), map(p("x",1), p("y",1), p("C",seq(1))))), transition(p(seq("l2", "l2"), map(p("x",1), p("y",1), p("C",seq()))), "C!x", p(seq("l1", "l2"), map(p("x",1), p("y",1), p("C",seq(1)))))),ts.getTransitions());
-		assertEquals(set("x = 0", "y = 1"), ts.getLabel(p(seq("l1", "l1"), map(p("x",0), p("y",1)))));
-		assertEquals(set("x = 1", "y = 1", "C = [1]"), ts.getLabel(p(seq("l1", "l2"), map(p("x",1), p("y",1), p("C",seq(1))))));
-		assertEquals(set("x = 0", "y = 1", "C = [1]"), ts.getLabel(p(seq("l1", "l2"), map(p("x",0), p("y",1), p("C",seq(1))))));
-		assertEquals(set("C = []", "x = 1", "y = 1"), ts.getLabel(p(seq("l2", "l2"), map(p("x",1), p("y",1), p("C",seq())))));
-		assertEquals(set("C = []", "x = 1", "y = 1"), ts.getLabel(p(seq("l1", "l1"), map(p("x",1), p("y",1), p("C",seq())))));
-		assertEquals(set("C = []", "x = 0", "y = 1"), ts.getLabel(p(seq("l1", "l1"), map(p("x",0), p("y",1), p("C",seq())))));
 
-
-
+		assertEquals(set(p(seq("l1", "l1"), map(p("x",0), p("y",0))), p(seq("l1", "l2"), map(p("x",0), p("y",0), p("C",seq(0)))), p(seq("l2", "l2"), map(p("x",0), p("y",0), p("C",seq()))), p(seq("l1", "l1"), map(p("x",0), p("y",0), p("C",seq())))),ts.getStates());
+		assertEquals(set(p(seq("l1", "l1"), map(p("x",0), p("y",0)))),ts.getInitialStates());
+		assertEquals(set("C!y", "C?y", "C?x"),ts.getActions());
+		assertEquals(set("C = [0]", "C = []", "y = 0", "x = 0"),ts.getAtomicPropositions());
+		assertEquals(set(transition(p(seq("l1", "l2"), map(p("x",0), p("y",0), p("C",seq(0)))), "C?x", p(seq("l2", "l2"), map(p("x",0), p("y",0), p("C",seq())))), transition(p(seq("l1", "l2"), map(p("x",0), p("y",0), p("C",seq(0)))), "C?y", p(seq("l1", "l1"), map(p("x",0), p("y",0), p("C",seq())))), transition(p(seq("l1", "l1"), map(p("x",0), p("y",0))), "C!y", p(seq("l1", "l2"), map(p("x",0), p("y",0), p("C",seq(0))))), transition(p(seq("l1", "l1"), map(p("x",0), p("y",0), p("C",seq()))), "C!y", p(seq("l1", "l2"), map(p("x",0), p("y",0), p("C",seq(0)))))),ts.getTransitions());
+		assertEquals(set("y = 0", "x = 0"), ts.getLabel(p(seq("l1", "l1"), map(p("x",0), p("y",0)))));
+		assertEquals(set("C = [0]", "y = 0", "x = 0"), ts.getLabel(p(seq("l1", "l2"), map(p("x",0), p("y",0), p("C",seq(0))))));
+		assertEquals(set("C = []", "y = 0", "x = 0"), ts.getLabel(p(seq("l2", "l2"), map(p("x",0), p("y",0), p("C",seq())))));
+		assertEquals(set("C = []", "y = 0", "x = 0"), ts.getLabel(p(seq("l1", "l1"), map(p("x",0), p("y",0), p("C",seq())))));
 	}
 
 }

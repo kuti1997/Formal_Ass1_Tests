@@ -20,6 +20,7 @@ import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.Pair;
 import il.ac.bgu.cs.fvm.util.codeprinter.TsPrinter;
 
+@SuppressWarnings("unused")
 public class TransitionSystemsProductTests {
 
 	FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
@@ -153,7 +154,6 @@ public class TransitionSystemsProductTests {
 		assertEquals(set("tl2-is-red", "tl1-is-red"), ts.getLabel(p("red", "red")));
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void three() {
 		TransitionSystem<String, String, String> ts1 = FvmFacade.createInstance().createTransitionSystem();
@@ -195,18 +195,15 @@ public class TransitionSystemsProductTests {
 			TransitionSystem<Pair<Pair<String, String>, String>, String, String> ts123 = fvmFacadeImpl.interleave(ts12,
 					ts3, set("b"));
 
-			System.out.println("A->" + ts123.getStates().size());
-			System.out.println(ts123.getStates());
+			assertEquals(set(p(p("1", "1"), "1"), p(p("1", "1"), "2"), p(p("1", "2"), "4"), p(p("1", "2"), "3"),
+					p(p("1", "2"), "5")), ts123.getStates());
 
-//			assertEquals(set(p(p("1", "1"), "1"), p(p("1", "1"), "2"), p(p("1", "2"), "4"), p(p("1", "2"), "3"),
-//					p(p("1", "2"), "5")), ts123.getStates());
-//
-//			assertEquals(set(p(p("1", "1"), "1")), ts123.getInitialStates());
-//			assertEquals(set("a", "b"), ts123.getActions());
-//			assertEquals(set(transition(p(p("1", "1"), "1"), "a", p(p("1", "1"), "2")),
-//					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "3")),
-//					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "4")),
-//					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "5"))), ts123.getTransitions());
+			assertEquals(set(p(p("1", "1"), "1")), ts123.getInitialStates());
+			assertEquals(set("a", "b"), ts123.getActions());
+			assertEquals(set(transition(p(p("1", "1"), "1"), "a", p(p("1", "1"), "2")),
+					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "3")),
+					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "4")),
+					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "5"))), ts123.getTransitions());
 
 		}
 
@@ -216,13 +213,10 @@ public class TransitionSystemsProductTests {
 			TransitionSystem<Pair<String, Pair<String, String>>, String, String> ts123 = fvmFacadeImpl.interleave(ts1,
 					ts23, set("a"));
 
-			System.out.println("B->" + ts123.getStates().size());
-			System.out.println(ts123.getStates());
-
-//			assertEquals(set(p("1", p("1", "1")), p("2", p("1", "2"))), ts123.getStates());
-//			assertEquals(set(p("1", p("1", "1"))), ts123.getInitialStates());
-//			assertEquals(set("a"), ts123.getActions());
-//			assertEquals(set(transition(p("1", p("1", "1")), "a", p("2", p("1", "2")))), ts123.getTransitions());
+			assertEquals(set(p("1", p("1", "1")), p("2", p("1", "2"))), ts123.getStates());
+			assertEquals(set(p("1", p("1", "1"))), ts123.getInitialStates());
+			assertEquals(set("a"), ts123.getActions());
+			assertEquals(set(transition(p("1", p("1", "1")), "a", p("2", p("1", "2")))), ts123.getTransitions());
 		}
 
 	}
