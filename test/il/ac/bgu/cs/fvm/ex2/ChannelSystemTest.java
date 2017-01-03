@@ -155,9 +155,9 @@ public class ChannelSystemTest {
 				ts.getLabel(p(seq("l2", "l2"), map(p("x", 1), p("y", 1), p("C", seq())))));
 		assertEquals(set("C = []", "x = 1", "y = 1"),
 				ts.getLabel(p(seq("l1", "l1"), map(p("x", 1), p("y", 1), p("C", seq())))));
-		assertEquals(set("y = 0"), ts.getLabel(p(seq("l1", "l1"), map(p("y", 0)))));
-		assertEquals(set("y = 1"), ts.getLabel(p(seq("l1", "l1"), map(p("y", 1)))));
-		assertEquals(set("C = [0]", "y = 0"), ts.getLabel(p(seq("l1", "l2"), map(p("y", 0), p("C", seq(0))))));
+		assertEquals(set("y = 0", seq("l1", "l1")), ts.getLabel(p(seq("l1", "l1"), map(p("y", 0)))));
+		assertEquals(set("y = 1",seq("l1", "l1")), ts.getLabel(p(seq("l1", "l1"), map(p("y", 1)))));
+		assertEquals(set("C = [0]", "y = 0",seq("l1", "l2")), ts.getLabel(p(seq("l1", "l2"), map(p("y", 0), p("C", seq(0))))));
 
 	}
 }
