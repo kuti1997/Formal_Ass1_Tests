@@ -55,10 +55,8 @@ public class TransitionSystemsProductTests {
 		 * 
 		 * out.println(tsPrinter.getAssertions(ts));
 		 */
-		assertEquals(set(p(p(State.S1, State.S0), State.S0), p(p(State.S0, State.S0), State.S1),
-				p(p(State.S0, State.S1), State.S1), p(p(State.S1, State.S1), State.S1),
-				p(p(State.S0, State.S1), State.S0), p(p(State.S0, State.S0), State.S0),
-				p(p(State.S1, State.S0), State.S1), p(p(State.S1, State.S1), State.S0)), ts.getStates());
+		assertEquals(set(p(p(State.S1, State.S0), State.S0), p(p(State.S0, State.S0), State.S1), p(p(State.S0, State.S1), State.S1), p(p(State.S1, State.S1), State.S1), p(p(State.S0, State.S1), State.S0), p(p(State.S0, State.S0), State.S0), p(p(State.S1, State.S0), State.S1),
+				p(p(State.S1, State.S1), State.S0)), ts.getStates());
 
 		assertEquals(set(p(p(State.S0, State.S0), State.S0)), ts.getInitialStates());
 
@@ -66,26 +64,15 @@ public class TransitionSystemsProductTests {
 
 		assertEquals(set(), ts.getAtomicPropositions());
 
-		assertEquals(set(
-				transition(p(p(State.S0, State.S1), State.S0), Action.prt_cmd, p(p(State.S0, State.S0), State.S0)),
-				transition(p(p(State.S0, State.S1), State.S1), Action.print, p(p(State.S0, State.S1), State.S0)),
-				transition(p(p(State.S0, State.S1), State.S0), Action.scan, p(p(State.S1, State.S1), State.S0)),
-				transition(p(p(State.S1, State.S0), State.S0), Action.store, p(p(State.S0, State.S1), State.S0)),
-				transition(p(p(State.S0, State.S0), State.S1), Action.scan, p(p(State.S1, State.S0), State.S1)),
-				transition(p(p(State.S0, State.S1), State.S1), Action.prt_cmd, p(p(State.S0, State.S0), State.S1)),
-				transition(p(p(State.S1, State.S1), State.S0), Action.prt_cmd, p(p(State.S1, State.S1), State.S1)),
-				transition(p(p(State.S1, State.S0), State.S1), Action.store, p(p(State.S0, State.S1), State.S1)),
-				transition(p(p(State.S1, State.S0), State.S1), Action.print, p(p(State.S1, State.S0), State.S0)),
-				transition(p(p(State.S0, State.S1), State.S1), Action.scan, p(p(State.S1, State.S1), State.S1)),
-				transition(p(p(State.S0, State.S0), State.S0), Action.prt_cmd, p(p(State.S0, State.S0), State.S1)),
-				transition(p(p(State.S1, State.S1), State.S0), Action.prt_cmd, p(p(State.S1, State.S0), State.S0)),
-				transition(p(p(State.S1, State.S1), State.S1), Action.print, p(p(State.S1, State.S1), State.S0)),
-				transition(p(p(State.S1, State.S1), State.S1), Action.prt_cmd, p(p(State.S1, State.S0), State.S1)),
-				transition(p(p(State.S0, State.S1), State.S0), Action.prt_cmd, p(p(State.S0, State.S1), State.S1)),
-				transition(p(p(State.S0, State.S0), State.S1), Action.print, p(p(State.S0, State.S0), State.S0)),
-				transition(p(p(State.S0, State.S0), State.S0), Action.scan, p(p(State.S1, State.S0), State.S0)),
-				transition(p(p(State.S1, State.S0), State.S0), Action.prt_cmd, p(p(State.S1, State.S0), State.S1))),
-				ts.getTransitions());
+		assertEquals(set(transition(p(p(State.S0, State.S1), State.S0), Action.prt_cmd, p(p(State.S0, State.S0), State.S0)), transition(p(p(State.S0, State.S1), State.S1), Action.print, p(p(State.S0, State.S1), State.S0)),
+				transition(p(p(State.S0, State.S1), State.S0), Action.scan, p(p(State.S1, State.S1), State.S0)), transition(p(p(State.S1, State.S0), State.S0), Action.store, p(p(State.S0, State.S1), State.S0)),
+				transition(p(p(State.S0, State.S0), State.S1), Action.scan, p(p(State.S1, State.S0), State.S1)), transition(p(p(State.S0, State.S1), State.S1), Action.prt_cmd, p(p(State.S0, State.S0), State.S1)),
+				transition(p(p(State.S1, State.S1), State.S0), Action.prt_cmd, p(p(State.S1, State.S1), State.S1)), transition(p(p(State.S1, State.S0), State.S1), Action.store, p(p(State.S0, State.S1), State.S1)),
+				transition(p(p(State.S1, State.S0), State.S1), Action.print, p(p(State.S1, State.S0), State.S0)), transition(p(p(State.S0, State.S1), State.S1), Action.scan, p(p(State.S1, State.S1), State.S1)),
+				transition(p(p(State.S0, State.S0), State.S0), Action.prt_cmd, p(p(State.S0, State.S0), State.S1)), transition(p(p(State.S1, State.S1), State.S0), Action.prt_cmd, p(p(State.S1, State.S0), State.S0)),
+				transition(p(p(State.S1, State.S1), State.S1), Action.print, p(p(State.S1, State.S1), State.S0)), transition(p(p(State.S1, State.S1), State.S1), Action.prt_cmd, p(p(State.S1, State.S0), State.S1)),
+				transition(p(p(State.S0, State.S1), State.S0), Action.prt_cmd, p(p(State.S0, State.S1), State.S1)), transition(p(p(State.S0, State.S0), State.S1), Action.print, p(p(State.S0, State.S0), State.S0)),
+				transition(p(p(State.S0, State.S0), State.S0), Action.scan, p(p(State.S1, State.S0), State.S0)), transition(p(p(State.S1, State.S0), State.S0), Action.prt_cmd, p(p(State.S1, State.S0), State.S1))), ts.getTransitions());
 
 		assertEquals(set(), ts.getLabel(p(p(State.S1, State.S0), State.S0)));
 		assertEquals(set(), ts.getLabel(p(p(State.S0, State.S0), State.S1)));
@@ -139,14 +126,8 @@ public class TransitionSystemsProductTests {
 
 		assertEquals(set("tl2-is-red", "tl1-is-red"), ts.getAtomicPropositions());
 
-		assertEquals(set(transition(p("green", "green"), "go1", p("red", "green")),
-				transition(p("red", "red"), "go2", p("red", "green")),
-				transition(p("green", "red"), "go2", p("green", "green")),
-				transition(p("green", "red"), "go1", p("red", "red")),
-				transition(p("red", "red"), "go1", p("green", "red")),
-				transition(p("red", "green"), "go2", p("red", "red")),
-				transition(p("green", "green"), "go2", p("green", "red")),
-				transition(p("red", "green"), "go1", p("green", "green"))), ts.getTransitions());
+		assertEquals(set(transition(p("green", "green"), "go1", p("red", "green")), transition(p("red", "red"), "go2", p("red", "green")), transition(p("green", "red"), "go2", p("green", "green")), transition(p("green", "red"), "go1", p("red", "red")),
+				transition(p("red", "red"), "go1", p("green", "red")), transition(p("red", "green"), "go2", p("red", "red")), transition(p("green", "green"), "go2", p("green", "red")), transition(p("red", "green"), "go1", p("green", "green"))), ts.getTransitions());
 
 		assertEquals(set("tl1-is-red"), ts.getLabel(p("red", "green")));
 		assertEquals(set(), ts.getLabel(p("green", "green")));
@@ -154,6 +135,7 @@ public class TransitionSystemsProductTests {
 		assertEquals(set("tl2-is-red", "tl1-is-red"), ts.getLabel(p("red", "red")));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void three() {
 		TransitionSystem<String, String, String> ts1 = FvmFacade.createInstance().createTransitionSystem();
@@ -192,31 +174,39 @@ public class TransitionSystemsProductTests {
 		{
 			TransitionSystem<Pair<String, String>, String, String> ts12 = fvmFacadeImpl.interleave(ts1, ts2, set("a"));
 
-			TransitionSystem<Pair<Pair<String, String>, String>, String, String> ts123 = fvmFacadeImpl.interleave(ts12,
-					ts3, set("b"));
+			TransitionSystem<Pair<Pair<String, String>, String>, String, String> ts123 = fvmFacadeImpl.interleave(ts12, ts3, set("b"));
 
-			assertEquals(set(p(p("1", "1"), "1"), p(p("1", "1"), "2"), p(p("1", "2"), "4"), p(p("1", "2"), "3"),
-					p(p("1", "2"), "5")), ts123.getStates());
-
+			assertEquals(set(p(p("1", "1"), "1"), p(p("1", "1"), "2"), p(p("2", "3"), "5"), p(p("1", "2"), "4"), p(p("1", "2"), "3"), p(p("2", "3"), "4"), p(p("1", "2"), "5"), p(p("2", "3"), "3")), ts123.getStates());
 			assertEquals(set(p(p("1", "1"), "1")), ts123.getInitialStates());
 			assertEquals(set("a", "b"), ts123.getActions());
-			assertEquals(set(transition(p(p("1", "1"), "1"), "a", p(p("1", "1"), "2")),
-					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "3")),
-					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "4")),
-					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "5"))), ts123.getTransitions());
-
+			assertEquals(set(), ts123.getAtomicPropositions());
+			assertEquals(set(transition(p(p("1", "1"), "1"), "a", p(p("1", "1"), "2")), transition(p(p("1", "2"), "4"), "a", p(p("2", "3"), "4")), transition(p(p("1", "2"), "3"), "a", p(p("2", "3"), "3")), transition(p(p("1", "2"), "5"), "a", p(p("2", "3"), "5")),
+					transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "3")), transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "4")), transition(p(p("1", "1"), "2"), "b", p(p("1", "2"), "5"))), ts123.getTransitions());
+			assertEquals(set(), ts123.getLabel(p(p("1", "1"), "1")));
+			assertEquals(set(), ts123.getLabel(p(p("1", "1"), "2")));
+			assertEquals(set(), ts123.getLabel(p(p("2", "3"), "5")));
+			assertEquals(set(), ts123.getLabel(p(p("1", "2"), "4")));
+			assertEquals(set(), ts123.getLabel(p(p("1", "2"), "3")));
+			assertEquals(set(), ts123.getLabel(p(p("2", "3"), "4")));
+			assertEquals(set(), ts123.getLabel(p(p("1", "2"), "5")));
+			assertEquals(set(), ts123.getLabel(p(p("2", "3"), "3")));
 		}
 
 		{
 			TransitionSystem<Pair<String, String>, String, String> ts23 = fvmFacadeImpl.interleave(ts2, ts3, set("b"));
 
-			TransitionSystem<Pair<String, Pair<String, String>>, String, String> ts123 = fvmFacadeImpl.interleave(ts1,
-					ts23, set("a"));
+			TransitionSystem<Pair<String, Pair<String, String>>, String, String> ts123 = fvmFacadeImpl.interleave(ts1, ts23, set("a"));
 
-			assertEquals(set(p("1", p("1", "1")), p("2", p("1", "2"))), ts123.getStates());
+			assertEquals(set(p("2", p("2", "3")), p("2", p("2", "5")), p("2", p("2", "4")), p("1", p("1", "1")), p("2", p("1", "2"))), ts123.getStates());
 			assertEquals(set(p("1", p("1", "1"))), ts123.getInitialStates());
-			assertEquals(set("a"), ts123.getActions());
-			assertEquals(set(transition(p("1", p("1", "1")), "a", p("2", p("1", "2")))), ts123.getTransitions());
+			assertEquals(set("a", "b"), ts123.getActions());
+			assertEquals(set(), ts123.getAtomicPropositions());
+			assertEquals(set(transition(p("2", p("1", "2")), "b", p("2", p("2", "4"))), transition(p("2", p("1", "2")), "b", p("2", p("2", "5"))), transition(p("1", p("1", "1")), "a", p("2", p("1", "2"))), transition(p("2", p("1", "2")), "b", p("2", p("2", "3")))), ts123.getTransitions());
+			assertEquals(set(), ts123.getLabel(p("2", p("2", "3"))));
+			assertEquals(set(), ts123.getLabel(p("2", p("2", "5"))));
+			assertEquals(set(), ts123.getLabel(p("2", p("2", "4"))));
+			assertEquals(set(), ts123.getLabel(p("1", p("1", "1"))));
+			assertEquals(set(), ts123.getLabel(p("2", p("1", "2"))));
 		}
 
 	}
