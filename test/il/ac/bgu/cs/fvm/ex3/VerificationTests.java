@@ -71,6 +71,7 @@ public class VerificationTests {
 		}
 	}
 
+	@Test
 	public void nanopromelaTest() throws Exception {
 		try (InputStream in = getClass().getClassLoader().getResourceAsStream("il/ac/bgu/cs/fvm/ex3/tst1.np")) {
 			ProgramGraph<String, String> pg = fvmFacadeImpl.programGraphFromNanoPromela(in);
