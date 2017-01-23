@@ -62,7 +62,7 @@ public class AutTsProductTests {
 		TransitionSystem<Lights, Actions, String> ts2 = buildTransitionSystem2();
 		Automaton<AutomatonStates, String> aut = buildAutomaton();
 
-		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> comb1 = fvmFacadeImpl.product(ts1, aut);
+		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, AutomatonStates> comb1 = fvmFacadeImpl.product(ts1, aut);
 
 		assertEquals(set(p(Green, Q0), p(Red, Q1), p(Red, Q2), p(Green, Q2), p(Red, Q0)), comb1.getStates());
 		assertEquals(set(p(Red, Q1), p(Red, Q0)), comb1.getInitialStates());
@@ -77,7 +77,7 @@ public class AutTsProductTests {
 		assertEquals(set(Q2), comb1.getLabel(p(Green, Q2)));
 		assertEquals(set(Q0), comb1.getLabel(p(Red, Q0)));
 
-		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, String> ts = fvmFacadeImpl.product(ts2, aut);
+		TransitionSystem<Pair<Lights, AutomatonStates>, Actions, AutomatonStates> ts = fvmFacadeImpl.product(ts2, aut);
 
 		assertEquals(set(p(Green, Q0), p(Off, Q2), p(Off, Q0), p(Red, Q1), p(Red, Q2), p(Green, Q2), p(Red, Q0), p(Off, Q1)), ts.getStates());
 		assertEquals(set(p(Red, Q1), p(Red, Q0)), ts.getInitialStates());
