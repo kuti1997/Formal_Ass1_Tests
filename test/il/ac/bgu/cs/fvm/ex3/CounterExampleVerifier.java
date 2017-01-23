@@ -90,7 +90,7 @@ public class CounterExampleVerifier<S, A, P, Saut> {
 		boolean found = false;
 		loop: for (List<Saut> r : autRuns) {
 			// Check for a cyclic run that contains an accepting state
-			List<Saut> rr = r.subList(1, r.size() - 1);
+			List<Saut> rr = r.subList(1, r.size());
 			if (aut.nextStates(rr.get(rr.size() - 1), ts.getLabel(vrf.getCycle().get(0))).contains(rr.get(0))) {
 				rr.retainAll(aut.getAcceptingStates());
 				if (!rr.isEmpty()) {
