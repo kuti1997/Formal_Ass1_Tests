@@ -5,6 +5,7 @@ import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
 import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -137,6 +138,7 @@ public class VerificationTests {
 		{
 			Automaton<String, String> aut = new AutomataFactory<>(ts).eventuallyPhiAut(a -> a.contains("crit1") && a.contains("crit2"));
 			VerificationResult<Pair<Pair<String, String>, Map<String, Object>>> vr = fvmFacadeImpl.verifyAnOmegaRegularProperty(ts, aut);
+
 			assertTrue(vr instanceof VerificationSucceeded);
 		}
 
@@ -205,6 +207,11 @@ public class VerificationTests {
 
 	// Add labels to ts for formulating mutual exclusion properties.
 	private void addLabels(TransitionSystem<Pair<Pair<String, String>, Map<String, Object>>, String, String> ts) {
+		ts.getStates().stream().forEach(st -> ts.getAtomicPropositions().stream().forEach(ap -> ts.removeLabel(st, ap)));
+
+		Set<String> aps = new HashSet<>(ts.getAtomicPropositions());
+		aps.stream().forEach(ap -> ts.removeAtomicProposition(ap));
+
 		seq("wait1", "wait2", "crit1", "crit2", "crit1_enabled").stream().forEach(s -> ts.addAtomicPropositions(s));
 
 		ts.getStates().stream().filter(s -> s.getFirst().getFirst().equals("crit1")).forEach(s -> ts.addToLabel(s, "crit1"));
