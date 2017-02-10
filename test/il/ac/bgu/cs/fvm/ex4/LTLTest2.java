@@ -1,5 +1,6 @@
 package il.ac.bgu.cs.fvm.ex4;
 
+import il.ac.bgu.cs.fvm.FvmFacade;
 import static il.ac.bgu.cs.fvm.ltl.LTL.and;
 import static il.ac.bgu.cs.fvm.ltl.LTL.next;
 import static il.ac.bgu.cs.fvm.ltl.LTL.not;
@@ -10,13 +11,12 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import il.ac.bgu.cs.fvm.automata.Automaton;
-import il.ac.bgu.cs.fvm.impl.FvmFacadeImpl;
 import il.ac.bgu.cs.fvm.ltl.AP;
 import il.ac.bgu.cs.fvm.ltl.LTL;
 
 public class LTLTest2 {
 
-	FvmFacadeImpl fvmFacadeImpl = new FvmFacadeImpl();
+	FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
 
 	@Test
 	public void test1() {
