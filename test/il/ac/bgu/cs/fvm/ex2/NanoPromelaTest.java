@@ -1,6 +1,5 @@
 package il.ac.bgu.cs.fvm.ex2;
 
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.pgtransition;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
@@ -24,6 +23,8 @@ import il.ac.bgu.cs.fvm.programgraph.ParserBasedCondDef;
 import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.Pair;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.singeltonMap;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 
 @SuppressWarnings("deprecation")
 public class NanoPromelaTest {
@@ -196,75 +197,74 @@ public class NanoPromelaTest {
 								"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od")),
 				pg.getTransitions());
 
-		assertEquals(set(
-				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 3))),
+		assertEquals(set(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+						singeltonMap(p("nbeer", 2), p("nsoda", 3))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						map()),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 0))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 0))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 2))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 1))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 1))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 3))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 3))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 0))),
+						singeltonMap(p("nbeer", 2), p("nsoda", 0))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 2))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 2))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 2), p("nsoda", 1))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 3))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 3))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 3))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 3))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 2), p("nsoda", 2))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 0))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 0))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 1))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 0))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 0))),
 				p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						map()),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 3))),
+						singeltonMap(p("nbeer", 2), p("nsoda", 3))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 3))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 3))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 2), p("nsoda", 2))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 0))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 0))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 2))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 1))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 1))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 0))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 0))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 2))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 2), p("nsoda", 1))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 3))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 3))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 3), p("nsoda", 1))),
+						singeltonMap(p("nbeer", 3), p("nsoda", 1))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 3))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 3))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 2), p("nsoda", 0))),
+						singeltonMap(p("nbeer", 2), p("nsoda", 0))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 0), p("nsoda", 2))),
+						singeltonMap(p("nbeer", 0), p("nsoda", 2))),
 				p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-						map(p("nbeer", 1), p("nsoda", 0)))),
+						singeltonMap(p("nbeer", 1), p("nsoda", 0)))),
 				ts.getStates());
 		assertEquals(
 				set(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
@@ -275,603 +275,480 @@ public class NanoPromelaTest {
 				"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 				"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 				"nsoda = 1", "nsoda = 0", "nsoda = 3", "nsoda = 2"), ts.getAtomicPropositions());
-		assertEquals(
-				set(transition(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 0))),
+		assertEquals(set(transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 0))),
 						"nbeer:=nbeer-1",
 						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 0)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 2))),
+								singeltonMap(p("nbeer", 2), p("nsoda", 0)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 2))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 2)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 2)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 3))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 0))),
 								"skip",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 0)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 1))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 0))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 1))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 0)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 0)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 3))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 2)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 2)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 2))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 1)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 1)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 3))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 2))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 1))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 1)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 1)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 3))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 0))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 0)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 0)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 2))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 2)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 2)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 3))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 1))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 1)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 1)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 2))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 2)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 2)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 0))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 2))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 1))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 3))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 2)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 2))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 1)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 1)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 1))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 0)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 3))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 2))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 2)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 2)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 1))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 1)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 1)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 3))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 0))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 0)))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 0)))),
 						transition(
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 										map()),
 								"skip",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 										map())),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 2))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 2))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 2)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 0))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 0)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 1))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 1)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 1)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 3))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 3))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 2)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 2)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 1))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 2))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 1)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 1)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 0))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 2))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 1))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 0)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 0)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 3))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 2))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 2)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 1))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 1)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 1)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 0))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 0)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 1))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 1)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 1)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 3))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 										map()),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 0))),
 								"nbeer:=nbeer-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 0)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 0)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 0))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 2))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 1))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 3))),
 								"atomic{nbeer:=3;nsoda:=3}",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 3)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 3)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 2))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 1)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 1)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 1))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 0)))),
-						transition(
-								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 3))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 0)))),
+						transition(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 3))),
 								"nsoda:=nsoda-1",
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 2)))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 2)))),
 						transition(
 								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 										map()),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 										map())),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 3))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 2), p("nsoda", 3))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 2), p("nsoda", 3)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 0))),
+										singeltonMap(p("nbeer", 2), p("nsoda", 3)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 3), p("nsoda", 0))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 3), p("nsoda", 0)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 2))),
+										singeltonMap(p("nbeer", 3), p("nsoda", 0)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 1), p("nsoda", 2))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 1), p("nsoda", 2)))),
-						transition(
-								p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 1))),
+										singeltonMap(p("nbeer", 1), p("nsoda", 2)))),
+						transition(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+										singeltonMap(p("nbeer", 0), p("nsoda", 1))),
 								"skip",
 								p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-										map(p("nbeer", 0), p("nsoda", 1))))),
+										singeltonMap(p("nbeer", 0), p("nsoda", 1))))),
 				ts.getTransitions());
 
-		assertEquals(
-				set("nbeer = 2",
+		assertEquals(set("nbeer = 2",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 3)))));
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 3)))));
 		assertEquals(
 				set("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od"),
 				ts.getLabel(
 						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 								map())));
-		assertEquals(
-				set("nbeer = 3",
+		assertEquals(set("nbeer = 3",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 0)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 0)))));
+		assertEquals(set("nbeer = 1",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 0",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 3",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 3",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 1",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 3)))));
-		assertEquals(
-				set("nbeer = 2",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 3)))));
+		assertEquals(set("nbeer = 2",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 0)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 0)))));
+		assertEquals(set("nbeer = 0",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 3",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 3",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 2",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 2",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 0",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 3)))));
-		assertEquals(
-				set("nbeer = 3",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 3)))));
+		assertEquals(set("nbeer = 3",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 3)))));
-		assertEquals(
-				set("nbeer = 2",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 3)))));
+		assertEquals(set("nbeer = 2",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 1",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 0)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 0)))));
+		assertEquals(set("nbeer = 1",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 0",
 						"if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 0)))));
+				ts.getLabel(p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 0)))));
 		assertEquals(
 				set("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od"),
 				ts.getLabel(
 						p("if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi;do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 								map())));
-		assertEquals(
-				set("nbeer = 2",
+		assertEquals(set("nbeer = 2",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 3)))));
-		assertEquals(
-				set("nbeer = 3",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 3)))));
+		assertEquals(set("nbeer = 3",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 3)))));
-		assertEquals(
-				set("nbeer = 2",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 3)))));
+		assertEquals(set("nbeer = 2",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 3",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 3",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 0)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 0)))));
+		assertEquals(set("nbeer = 1",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 0",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 1",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 0",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 0)))));
-		assertEquals(
-				set("nbeer = 3",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 0)))));
+		assertEquals(set("nbeer = 3",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 2",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 2",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 0",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 3)))));
-		assertEquals(
-				set("nbeer = 3",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 3)))));
+		assertEquals(set("nbeer = 3",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 1"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 3), p("nsoda", 1)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 3), p("nsoda", 1)))));
+		assertEquals(set("nbeer = 1",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 3"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 3)))));
-		assertEquals(
-				set("nbeer = 2",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 3)))));
+		assertEquals(set("nbeer = 2",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 2), p("nsoda", 0)))));
-		assertEquals(
-				set("nbeer = 0",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 2), p("nsoda", 0)))));
+		assertEquals(set("nbeer = 0",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 2"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 0), p("nsoda", 2)))));
-		assertEquals(
-				set("nbeer = 1",
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 0), p("nsoda", 2)))));
+		assertEquals(set("nbeer = 1",
 						"do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
 						"nsoda = 0"),
-				ts.getLabel(
-						p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
-								map(p("nbeer", 1), p("nsoda", 0)))));
+				ts.getLabel(p("do::true->skip;if::nsoda>0->nsoda:=nsoda-1::nbeer>0->nbeer:=nbeer-1::(nsoda==0)&&(nbeer==0)->skipfi::true->atomic{nbeer:=3;nsoda:=3}od",
+								singeltonMap(p("nbeer", 1), p("nsoda", 0)))));
 
 	}
 

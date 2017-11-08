@@ -1,6 +1,5 @@
 package il.ac.bgu.cs.fvm.ex2;
 
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.pgtransition;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
@@ -21,6 +20,8 @@ import il.ac.bgu.cs.fvm.programgraph.ParserBasedActDef;
 import il.ac.bgu.cs.fvm.programgraph.ParserBasedCondDef;
 import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.singeltonMap;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 
 public class ProgramGraphProductTest {
 

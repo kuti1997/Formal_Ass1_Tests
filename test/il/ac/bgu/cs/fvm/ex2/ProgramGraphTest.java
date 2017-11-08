@@ -1,7 +1,6 @@
 package il.ac.bgu.cs.fvm.ex2;
 
 import il.ac.bgu.cs.fvm.FvmFacade;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
@@ -23,6 +22,8 @@ import il.ac.bgu.cs.fvm.programgraph.ParserBasedCondDef;
 import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.Pair;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.singeltonMap;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 
 public class ProgramGraphTest {
 
@@ -88,19 +89,18 @@ public class ProgramGraphTest {
 
 		TransitionSystem ts = fvmFacadeImpl.transitionSystemFromProgramGraph(pg, actionDefs, conditionDefs);
 
-		assertEquals(
-				set(p("select", map(p("nbeer", 2), p("nsoda", 0))), p("select", map(p("nbeer", 0), p("nsoda", 2))),
-						p("select", map(p("nbeer", 1), p("nsoda", 2))), p("select", map(p("nbeer", 0), p("nsoda", 1))),
-						p("select", map(p("nbeer", 1), p("nsoda", 1))), p("select", map(p("nbeer", 0), p("nsoda", 0))),
-						p("select", map(p("nbeer", 1), p("nsoda", 0))), p("select", map(p("nbeer", 2), p("nsoda", 2))),
-						p("select", map(p("nbeer", 2), p("nsoda", 1))), p("start", map(p("nbeer", 1), p("nsoda", 0))),
-						p("start", map(p("nbeer", 1), p("nsoda", 1))), p("start", map(p("nbeer", 0), p("nsoda", 0))),
-						p("start", map(p("nbeer", 2), p("nsoda", 1))), p("start", map(p("nbeer", 2), p("nsoda", 2))),
-						p("start", map(p("nbeer", 1), p("nsoda", 2))), p("start", map(p("nbeer", 0), p("nsoda", 1))),
-						p("start", map(p("nbeer", 2), p("nsoda", 0))), p("start", map(p("nbeer", 0), p("nsoda", 2)))),
+		assertEquals(set(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 0))), p("select", singeltonMap(p("nbeer", 0), p("nsoda", 2))),
+						p("select", singeltonMap(p("nbeer", 1), p("nsoda", 2))), p("select", singeltonMap(p("nbeer", 0), p("nsoda", 1))),
+						p("select", singeltonMap(p("nbeer", 1), p("nsoda", 1))), p("select", singeltonMap(p("nbeer", 0), p("nsoda", 0))),
+						p("select", singeltonMap(p("nbeer", 1), p("nsoda", 0))), p("select", singeltonMap(p("nbeer", 2), p("nsoda", 2))),
+						p("select", singeltonMap(p("nbeer", 2), p("nsoda", 1))), p("start", singeltonMap(p("nbeer", 1), p("nsoda", 0))),
+						p("start", singeltonMap(p("nbeer", 1), p("nsoda", 1))), p("start", singeltonMap(p("nbeer", 0), p("nsoda", 0))),
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 1))), p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2))),
+						p("start", singeltonMap(p("nbeer", 1), p("nsoda", 2))), p("start", singeltonMap(p("nbeer", 0), p("nsoda", 1))),
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 0))), p("start", singeltonMap(p("nbeer", 0), p("nsoda", 2)))),
 				ts.getStates());
 
-		assertEquals(set(p("start", map(p("nbeer", 2), p("nsoda", 2)))), ts.getInitialStates());
+		assertEquals(set(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))), ts.getInitialStates());
 
 		assertEquals(set("refill", "sget", "ret_coin", "bget", "coin"), ts.getActions());
 
@@ -108,107 +108,106 @@ public class ProgramGraphTest {
 				set("nbeer = 2", "nbeer = 1", "nbeer = 0", "nsoda = 1", "nsoda = 0", "nsoda = 2", "start", "select"),
 				ts.getAtomicPropositions());
 
-		assertEquals(set(
-				transition(p("select", map(p("nbeer", 1), p("nsoda", 1))), "bget",
-						p("start", map(p("nbeer", 0), p("nsoda", 1)))),
-				transition(p("select", map(p("nbeer", 2), p("nsoda", 2))), "bget",
-						p("start", map(p("nbeer", 1), p("nsoda", 2)))),
-				transition(p("select", map(p("nbeer", 2), p("nsoda", 0))), "bget",
-						p("start", map(p("nbeer", 1), p("nsoda", 0)))),
-				transition(p("start", map(p("nbeer", 2), p("nsoda", 2))), "coin",
-						p("select", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 2), p("nsoda", 0))), "coin",
-						p("select", map(p("nbeer", 2), p("nsoda", 0)))),
-				transition(p("start", map(p("nbeer", 0), p("nsoda", 2))), "coin",
-						p("select", map(p("nbeer", 0), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 1), p("nsoda", 1))), "coin",
-						p("select", map(p("nbeer", 1), p("nsoda", 1)))),
-				transition(p("start", map(p("nbeer", 0), p("nsoda", 0))), "coin",
-						p("select", map(p("nbeer", 0), p("nsoda", 0)))),
-				transition(p("select", map(p("nbeer", 2), p("nsoda", 1))), "sget",
-						p("start", map(p("nbeer", 2), p("nsoda", 0)))),
-				transition(p("select", map(p("nbeer", 1), p("nsoda", 2))), "sget",
-						p("start", map(p("nbeer", 1), p("nsoda", 1)))),
-				transition(p("select", map(p("nbeer", 0), p("nsoda", 1))), "sget",
-						p("start", map(p("nbeer", 0), p("nsoda", 0)))),
-				transition(p("start", map(p("nbeer", 2), p("nsoda", 2))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 2), p("nsoda", 0))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 0), p("nsoda", 2))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 1), p("nsoda", 1))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 0), p("nsoda", 0))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("select", map(p("nbeer", 1), p("nsoda", 2))), "bget",
-						p("start", map(p("nbeer", 0), p("nsoda", 2)))),
-				transition(p("select", map(p("nbeer", 1), p("nsoda", 0))), "bget",
-						p("start", map(p("nbeer", 0), p("nsoda", 0)))),
-				transition(p("select", map(p("nbeer", 2), p("nsoda", 1))), "bget",
-						p("start", map(p("nbeer", 1), p("nsoda", 1)))),
-				transition(p("start", map(p("nbeer", 2), p("nsoda", 1))), "coin",
-						p("select", map(p("nbeer", 2), p("nsoda", 1)))),
-				transition(p("start", map(p("nbeer", 1), p("nsoda", 2))), "coin",
-						p("select", map(p("nbeer", 1), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 0), p("nsoda", 1))), "coin",
-						p("select", map(p("nbeer", 0), p("nsoda", 1)))),
-				transition(p("start", map(p("nbeer", 1), p("nsoda", 0))), "coin",
-						p("select", map(p("nbeer", 1), p("nsoda", 0)))),
-				transition(p("select", map(p("nbeer", 2), p("nsoda", 2))), "sget",
-						p("start", map(p("nbeer", 2), p("nsoda", 1)))),
-				transition(p("select", map(p("nbeer", 1), p("nsoda", 1))), "sget",
-						p("start", map(p("nbeer", 1), p("nsoda", 0)))),
-				transition(p("select", map(p("nbeer", 0), p("nsoda", 2))), "sget",
-						p("start", map(p("nbeer", 0), p("nsoda", 1)))),
-				transition(p("select", map(p("nbeer", 0), p("nsoda", 0))), "ret_coin",
-						p("start", map(p("nbeer", 0), p("nsoda", 0)))),
-				transition(p("start", map(p("nbeer", 2), p("nsoda", 1))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 1), p("nsoda", 2))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 0), p("nsoda", 1))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2)))),
-				transition(p("start", map(p("nbeer", 1), p("nsoda", 0))), "refill",
-						p("start", map(p("nbeer", 2), p("nsoda", 2))))),
+		assertEquals(set(transition(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 1))), "bget",
+						p("start", singeltonMap(p("nbeer", 0), p("nsoda", 1)))),
+				transition(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 2))), "bget",
+						p("start", singeltonMap(p("nbeer", 1), p("nsoda", 2)))),
+				transition(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 0))), "bget",
+						p("start", singeltonMap(p("nbeer", 1), p("nsoda", 0)))),
+				transition(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2))), "coin",
+						p("select", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 0))), "coin",
+						p("select", singeltonMap(p("nbeer", 2), p("nsoda", 0)))),
+				transition(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 2))), "coin",
+						p("select", singeltonMap(p("nbeer", 0), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 1))), "coin",
+						p("select", singeltonMap(p("nbeer", 1), p("nsoda", 1)))),
+				transition(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 0))), "coin",
+						p("select", singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+				transition(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 1))), "sget",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 0)))),
+				transition(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 2))), "sget",
+						p("start", singeltonMap(p("nbeer", 1), p("nsoda", 1)))),
+				transition(p("select", singeltonMap(p("nbeer", 0), p("nsoda", 1))), "sget",
+						p("start", singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+				transition(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 0))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 2))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 1))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 0))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 2))), "bget",
+						p("start", singeltonMap(p("nbeer", 0), p("nsoda", 2)))),
+				transition(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 0))), "bget",
+						p("start", singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+				transition(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 1))), "bget",
+						p("start", singeltonMap(p("nbeer", 1), p("nsoda", 1)))),
+				transition(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 1))), "coin",
+						p("select", singeltonMap(p("nbeer", 2), p("nsoda", 1)))),
+				transition(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 2))), "coin",
+						p("select", singeltonMap(p("nbeer", 1), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 1))), "coin",
+						p("select", singeltonMap(p("nbeer", 0), p("nsoda", 1)))),
+				transition(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 0))), "coin",
+						p("select", singeltonMap(p("nbeer", 1), p("nsoda", 0)))),
+				transition(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 2))), "sget",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 1)))),
+				transition(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 1))), "sget",
+						p("start", singeltonMap(p("nbeer", 1), p("nsoda", 0)))),
+				transition(p("select", singeltonMap(p("nbeer", 0), p("nsoda", 2))), "sget",
+						p("start", singeltonMap(p("nbeer", 0), p("nsoda", 1)))),
+				transition(p("select", singeltonMap(p("nbeer", 0), p("nsoda", 0))), "ret_coin",
+						p("start", singeltonMap(p("nbeer", 0), p("nsoda", 0)))),
+				transition(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 1))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 2))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 1))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))),
+				transition(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 0))), "refill",
+						p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2))))),
 				ts.getTransitions());
 
 		assertEquals(set("nbeer = 2", "nsoda = 0", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 2), p("nsoda", 0)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 0)))));
 		assertEquals(set("nbeer = 0", "nsoda = 2", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 0), p("nsoda", 2)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 0), p("nsoda", 2)))));
 		assertEquals(set("nbeer = 1", "nsoda = 2", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 1), p("nsoda", 2)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 2)))));
 		assertEquals(set("nbeer = 0", "nsoda = 1", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 0), p("nsoda", 1)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 0), p("nsoda", 1)))));
 		assertEquals(set("nbeer = 1", "nsoda = 1", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 1), p("nsoda", 1)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 1)))));
 		assertEquals(set("nbeer = 0", "nsoda = 0", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 0), p("nsoda", 0)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 0), p("nsoda", 0)))));
 		assertEquals(set("nbeer = 1", "nsoda = 0", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 1), p("nsoda", 0)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 1), p("nsoda", 0)))));
 		assertEquals(set("nbeer = 2", "nsoda = 2", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 2), p("nsoda", 2)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 2)))));
 		assertEquals(set("nbeer = 2", "nsoda = 1", "select"),
-				ts.getLabel(p("select", map(p("nbeer", 2), p("nsoda", 1)))));
+				ts.getLabel(p("select", singeltonMap(p("nbeer", 2), p("nsoda", 1)))));
 		assertEquals(set("nbeer = 1", "nsoda = 0", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 1), p("nsoda", 0)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 0)))));
 		assertEquals(set("nbeer = 1", "nsoda = 1", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 1), p("nsoda", 1)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 1)))));
 		assertEquals(set("nbeer = 0", "nsoda = 0", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 0), p("nsoda", 0)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 0)))));
 		assertEquals(set("nbeer = 2", "nsoda = 1", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 2), p("nsoda", 1)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 1)))));
 		assertEquals(set("nbeer = 2", "nsoda = 2", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 2), p("nsoda", 2)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 2)))));
 		assertEquals(set("nbeer = 1", "nsoda = 2", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 1), p("nsoda", 2)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 1), p("nsoda", 2)))));
 		assertEquals(set("nbeer = 0", "nsoda = 1", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 0), p("nsoda", 1)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 1)))));
 		assertEquals(set("nbeer = 2", "nsoda = 0", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 2), p("nsoda", 0)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 2), p("nsoda", 0)))));
 		assertEquals(set("nbeer = 0", "nsoda = 2", "start"),
-				ts.getLabel(p("start", map(p("nbeer", 0), p("nsoda", 2)))));
+				ts.getLabel(p("start", singeltonMap(p("nbeer", 0), p("nsoda", 2)))));
 
 	}
 
