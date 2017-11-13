@@ -1,5 +1,6 @@
 package il.ac.bgu.cs.fvm.ex2;
 
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.pgtransition;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
@@ -23,8 +24,6 @@ import il.ac.bgu.cs.fvm.programgraph.ParserBasedCondDef;
 import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.Pair;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 
 @SuppressWarnings("deprecation")
 public class NanoPromelaTest {

@@ -1,6 +1,6 @@
 package il.ac.bgu.cs.fvm.ex2;
 
-import il.ac.bgu.cs.fvm.FvmFacade;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
@@ -10,7 +10,10 @@ import static org.junit.Assert.assertEquals;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
 import org.junit.Test;
+
+import il.ac.bgu.cs.fvm.FvmFacade;
 import il.ac.bgu.cs.fvm.examples.CollatzProgramGraphBuilder;
 import il.ac.bgu.cs.fvm.examples.ExtendedVendingMachineBuilder;
 import il.ac.bgu.cs.fvm.examples.HillaryTrumpCounting;
@@ -22,8 +25,6 @@ import il.ac.bgu.cs.fvm.programgraph.ParserBasedCondDef;
 import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.Pair;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 
 public class ProgramGraphTest {
 

@@ -1,38 +1,34 @@
 package il.ac.bgu.cs.fvm.ex2;
 
-import il.ac.bgu.cs.fvm.FvmFacade;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
+import static il.ac.bgu.cs.fvm.util.CollectionHelper.singeltonMap;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
-import static junit.framework.TestCase.assertEquals;
-
-import java.util.LinkedList;
-import java.util.List;
-
-import org.junit.Test;
-
-import il.ac.bgu.cs.fvm.circuits.Circuit;
-import il.ac.bgu.cs.fvm.examples.ExampleCircuit;
-import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
-import il.ac.bgu.cs.fvm.util.CollectionHelper;
-import il.ac.bgu.cs.fvm.util.Pair;
 import static il.ac.bgu.cs.fvm.util.Pair.pair;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static java.util.Arrays.asList;
+import static junit.framework.TestCase.assertEquals;
+
 import java.util.Map;
 import java.util.Set;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.singeltonMap;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
+
+import org.junit.Test;
+
+import il.ac.bgu.cs.fvm.FvmFacade;
+import il.ac.bgu.cs.fvm.circuits.Circuit;
+import il.ac.bgu.cs.fvm.examples.ExampleCircuit;
+import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.GraphvizPainter;
+import il.ac.bgu.cs.fvm.util.Pair;
 import il.ac.bgu.cs.fvm.util.codeprinter.TsPrinter;
 
 public class CircuitTest {
 
     FvmFacade fvmFacadeImpl = FvmFacade.createInstance();
 
-    @Test
+    @SuppressWarnings("unchecked")
+	@Test
     public void test1() throws Exception {
         Circuit c = new ExampleCircuit();
 
