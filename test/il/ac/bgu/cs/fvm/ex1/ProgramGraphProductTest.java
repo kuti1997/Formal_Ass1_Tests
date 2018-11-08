@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex2;
+package il.ac.bgu.cs.fvm.ex1;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;

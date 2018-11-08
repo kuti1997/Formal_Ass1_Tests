@@ -15,7 +15,6 @@ import org.junit.Test;
 import il.ac.bgu.cs.fvm.exceptions.DeletionOfAttachedActionException;
 import il.ac.bgu.cs.fvm.exceptions.DeletionOfAttachedAtomicPropositionException;
 import il.ac.bgu.cs.fvm.exceptions.DeletionOfAttachedStateException;
-import il.ac.bgu.cs.fvm.exceptions.InvalidInitialStateException;
 import il.ac.bgu.cs.fvm.exceptions.InvalidTransitionException;
 import il.ac.bgu.cs.fvm.exceptions.StateNotFoundException;
 import il.ac.bgu.cs.fvm.transitionsystem.Transition;
@@ -40,32 +39,32 @@ public class TransitionSystemTest {
 		ts = FvmFacade.createInstance().createTransitionSystem();
 	}
 
-	@Test(expected = InvalidInitialStateException.class, timeout=2000)
+	@Test(expected = StateNotFoundException.class, timeout=2000)
 	public void initialStateMustBeInStates() throws Exception {
 		ts.addState(S1);
 		ts.addState(S2);
-		ts.addInitialState(S3);
+		ts.setInitial(S3, true);
 	}
 
     @Test( timeout=2000 )
 	public void initialStateMustBeInStatesValid() throws Exception {
 		ts.addState(S1);
 		ts.addState(S2);
-		ts.addInitialState(S1);
+		ts.setInitial(S1, true);
 	}
 
 	@Test(expected = DeletionOfAttachedStateException.class, timeout=2000)
 	public void initialStateCantBeRemoved() throws Exception {
 		ts.addState(S1);
-		ts.addInitialState(S1);
+		ts.setInitial(S1, true);
 		ts.removeState(S1);
 	}
 
 	@Test(timeout = 2000)
 	public void initialStateCanBeRemovedAfterCleaning() throws Exception {
 		ts.addState(S1);
-		ts.addInitialState(S1);
-		ts.removeInitialState(S1);
+		ts.setInitial(S1, true);
+		ts.setInitial(S1, false);
 		ts.removeState(S1);
 	}
 

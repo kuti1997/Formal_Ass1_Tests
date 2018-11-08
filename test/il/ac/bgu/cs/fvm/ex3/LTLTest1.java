@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex4;
+package il.ac.bgu.cs.fvm.ex3;
 
 import static il.ac.bgu.cs.fvm.ltl.LTL.next;
 import static il.ac.bgu.cs.fvm.ltl.LTL.not;

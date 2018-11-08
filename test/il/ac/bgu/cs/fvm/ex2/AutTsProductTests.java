@@ -1,12 +1,12 @@
-package il.ac.bgu.cs.fvm.ex3;
+package il.ac.bgu.cs.fvm.ex2;
 
-import static il.ac.bgu.cs.fvm.ex3.AutTsProductTests.Actions.Switch;
-import static il.ac.bgu.cs.fvm.ex3.AutTsProductTests.AutomatonStates.Q0;
-import static il.ac.bgu.cs.fvm.ex3.AutTsProductTests.AutomatonStates.Q1;
-import static il.ac.bgu.cs.fvm.ex3.AutTsProductTests.AutomatonStates.Q2;
-import static il.ac.bgu.cs.fvm.ex3.AutTsProductTests.Lights.Green;
-import static il.ac.bgu.cs.fvm.ex3.AutTsProductTests.Lights.Off;
-import static il.ac.bgu.cs.fvm.ex3.AutTsProductTests.Lights.Red;
+import static il.ac.bgu.cs.fvm.ex2.AutTsProductTests.Actions.Switch;
+import static il.ac.bgu.cs.fvm.ex2.AutTsProductTests.AutomatonStates.Q0;
+import static il.ac.bgu.cs.fvm.ex2.AutTsProductTests.AutomatonStates.Q1;
+import static il.ac.bgu.cs.fvm.ex2.AutTsProductTests.AutomatonStates.Q2;
+import static il.ac.bgu.cs.fvm.ex2.AutTsProductTests.Lights.Green;
+import static il.ac.bgu.cs.fvm.ex2.AutTsProductTests.Lights.Off;
+import static il.ac.bgu.cs.fvm.ex2.AutTsProductTests.Lights.Red;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
@@ -135,7 +135,7 @@ public class AutTsProductTests {
 		ts.addState(Green);
 		ts.addState(Red);
 
-		ts.addInitialState(Red);
+		ts.setInitial(Red, true);
 
 		ts.addAction(Actions.Switch);
 
@@ -154,7 +154,7 @@ public class AutTsProductTests {
 		TransitionSystem<Lights, Actions, String> ts = fvmFacadeImpl.createTransitionSystem();
 
 		ts.addStates(Off, Red, Green);
-		ts.addInitialState(Red);
+		ts.setInitial(Red, true);
 		ts.addAction(Switch);
 
 		ts.addTransitionFrom(Red).action(Switch).to(Green);

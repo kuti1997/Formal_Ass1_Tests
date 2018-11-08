@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import il.ac.bgu.cs.fvm.FvmFacade;
 import il.ac.bgu.cs.fvm.exceptions.FVMException;
-import il.ac.bgu.cs.fvm.exceptions.InvalidInitialStateException;
 import il.ac.bgu.cs.fvm.exceptions.InvalidLablingPairException;
+import il.ac.bgu.cs.fvm.exceptions.StateNotFoundException;
 import il.ac.bgu.cs.fvm.transitionsystem.Transition;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 
@@ -47,10 +47,10 @@ public class Ex1ConsistencyTest {
         fail("Accepted illegal transition: Action 'not-an-action' does not exist.");
     }
     
-    @Test(expected=InvalidInitialStateException.class, timeout=2000)
+    @Test(expected=StateNotFoundException.class, timeout=2000)
     public void illegalInitialState() {
         TransitionSystem<Integer, String, String> ts = makeLinearTs(5);
-        ts.addInitialState( 700 );
+        ts.setInitial( 700, true );
         fail("Accepted an illegal initial state");
     }
     
@@ -61,5 +61,18 @@ public class Ex1ConsistencyTest {
         ts.addToLabel( 1, "not-there" );
         fail("Accepted an illegal label");
     }
-            
+    
+    @Test(expected=StateNotFoundException.class, timeout=2000)
+    public void preForNonexistentState() {
+        TransitionSystem<Integer, String, String> ts = makeLinearTs(4);
+        sut.pre(ts, 404);
+        fail("Did not throw an exception while calculating pre for a nonexistent state");
+    }
+    
+    @Test(expected=StateNotFoundException.class, timeout=2000)
+    public void postForNonexistentState() {
+        TransitionSystem<Integer, String, String> ts = makeLinearTs(4);
+        sut.post(ts, 404);
+        fail("Did not throw an exception while calculating post for a nonexistent state");
+    }            
 }

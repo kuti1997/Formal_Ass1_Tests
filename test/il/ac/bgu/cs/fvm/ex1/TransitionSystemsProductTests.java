@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex2;
+package il.ac.bgu.cs.fvm.ex1;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
@@ -91,7 +91,7 @@ public class TransitionSystemsProductTests {
 		ts1.addState("red");
 		ts1.addState("green");
 
-		ts1.addInitialState("red");
+		ts1.setInitial("red", true);
 
 		ts1.addAction("go1");
 
@@ -105,7 +105,7 @@ public class TransitionSystemsProductTests {
 		ts2.addState("red");
 		ts2.addState("green");
 
-		ts2.addInitialState("red");
+		ts2.setInitial("red", true);
 		ts2.addAction("go2");
 
 		ts2.addAtomicProposition("tl2-is-red");
@@ -140,7 +140,7 @@ public class TransitionSystemsProductTests {
 
 		ts1.addState("1");
 		ts1.addState("2");
-		ts1.addInitialState("1");
+		ts1.setInitial("1", true);
 		ts1.addAction("a");
 		ts1.addAction("b");
 		ts1.addTransition(new Transition<>("1", "a", "2"));
@@ -149,7 +149,7 @@ public class TransitionSystemsProductTests {
 		ts2.addState("1");
 		ts2.addState("2");
 		ts2.addState("3");
-		ts2.addInitialState("1");
+		ts2.setInitial("1", true);
 		ts2.addAction("a");
 		ts2.addAction("b");
 		ts2.addTransition(new Transition<>("1", "b", "2"));
@@ -161,7 +161,7 @@ public class TransitionSystemsProductTests {
 		ts3.addState("3");
 		ts3.addState("4");
 		ts3.addState("5");
-		ts3.addInitialState("1");
+		ts3.setInitial("1", true);
 		ts3.addAction("a");
 		ts3.addAction("b");
 		ts3.addTransition(new Transition<>("1", "a", "2"));

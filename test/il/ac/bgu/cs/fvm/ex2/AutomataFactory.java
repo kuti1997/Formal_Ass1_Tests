@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex3;
+package il.ac.bgu.cs.fvm.ex2;
 
 import java.util.Set;
 import java.util.function.Predicate;

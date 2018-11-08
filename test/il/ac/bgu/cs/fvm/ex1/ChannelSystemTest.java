@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex2;
+package il.ac.bgu.cs.fvm.ex1;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
@@ -20,7 +20,6 @@ import il.ac.bgu.cs.fvm.programgraph.ProgramGraph;
 import il.ac.bgu.cs.fvm.transitionsystem.AlternatingSequence;
 import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.Pair;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.singeltonMap;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 
 public class ChannelSystemTest {
@@ -63,7 +62,7 @@ public class ChannelSystemTest {
 		pg1.addLocation("l1");
 		pg1.addLocation("l2");
 
-		pg1.addInitialLocation("l1");
+		pg1.setInitial("l1", true);
 
 		pg1.addTransition(new PGTransition<>("l1", "true", "C?x", "l2"));
 		pg1.addTransition(new PGTransition<>("l2", "x != 0 && size(C)<5", "C!x", "l1"));
@@ -73,7 +72,7 @@ public class ChannelSystemTest {
 		pg2.addLocation("l1");
 		pg2.addLocation("l2");
 
-		pg2.addInitialLocation("l1");
+		pg2.setInitial("l1", true);
 
 		pg2.addInitalization(seq("y:=0"));
 		pg2.addInitalization(seq("y:=1"));

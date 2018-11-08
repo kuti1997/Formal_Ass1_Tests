@@ -81,7 +81,7 @@ public class TSTestUtils {
             ts.addAtomicProposition(APs.values()[i]);
         });
 
-        ts.addInitialState(a);
+        ts.setInitial(a, true);
 
         ts.addTransitionFrom(a).action(alpha).to(b);
         ts.addTransitionFrom(b).action(beta).to(c);
@@ -118,7 +118,7 @@ public class TSTestUtils {
         ts.addStates(a, b, c);
         ts.addActions(alpha, beta);
 
-        ts.addInitialState(a);
+        ts.setInitial(a, true);
 
         ts.addTransitionFrom(a).action(alpha).to(a);
         ts.addTransitionFrom(a).action(alpha).to(b);
@@ -148,7 +148,7 @@ public class TSTestUtils {
                         .action("a" + i)
                         .to(stateFactory.apply(i + 1)));
 
-        retVal.addInitialState(stateFactory.apply(1));
+        retVal.setInitial(stateFactory.apply(1), true);
 
         return retVal;
     }

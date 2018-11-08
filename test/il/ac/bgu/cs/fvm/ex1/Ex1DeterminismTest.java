@@ -31,7 +31,7 @@ public class Ex1DeterminismTest {
     @Test(timeout = 2000)
     public void testIsActionDeterministicFalse_initial_states() {
         TransitionSystem<Integer,String,String> circularTs = makeCircularTs(4);
-        circularTs.addInitialState( 2 );
+        circularTs.setInitial( 2, true );
         assertFalse("TS has more than a single initial state", sut.isActionDeterministic(circularTs) );
         
     }
@@ -51,7 +51,7 @@ public class Ex1DeterminismTest {
     @Test(timeout = 2000)
     public void testIsAPDeterministicFalse_initial_states() {
         TransitionSystem<Integer, String, String> circularTs = makeCircularTs(4);
-        circularTs.addInitialState( 2 );
+        circularTs.setInitial( 2, true );
         assertFalse("TS has more than a single initial state", sut.isAPDeterministic(circularTs) );
     }
     

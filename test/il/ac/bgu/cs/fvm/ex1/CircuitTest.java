@@ -1,9 +1,8 @@
-package il.ac.bgu.cs.fvm.ex2;
+package il.ac.bgu.cs.fvm.ex1;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
-import static il.ac.bgu.cs.fvm.util.CollectionHelper.singeltonMap;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.transition;
 import static il.ac.bgu.cs.fvm.util.Pair.pair;
 import static java.lang.Boolean.FALSE;
@@ -22,6 +21,7 @@ import il.ac.bgu.cs.fvm.transitionsystem.TransitionSystem;
 import il.ac.bgu.cs.fvm.util.GraphvizPainter;
 import il.ac.bgu.cs.fvm.util.Pair;
 import il.ac.bgu.cs.fvm.util.codeprinter.TsPrinter;
+import static java.util.Collections.singletonMap;
 
 public class CircuitTest {
 
@@ -34,16 +34,16 @@ public class CircuitTest {
 
         TransitionSystem<Pair<Map<String, Boolean>, Map<String, Boolean>>, Map<String, Boolean>, Object> ts
                 = fvmFacadeImpl.transitionSystemFromCircuit(c);
-        final Pair<Map<String, Boolean>, Map<String, Boolean>> s00 = p(singeltonMap("x", FALSE), singeltonMap("r", FALSE));
-        final Pair<Map<String, Boolean>, Map<String, Boolean>> s10 = p(singeltonMap("x", TRUE), singeltonMap("r", FALSE));
-        final Pair<Map<String, Boolean>, Map<String, Boolean>> s01 = p(singeltonMap("x", FALSE), singeltonMap("r", TRUE));
-        final Pair<Map<String, Boolean>, Map<String, Boolean>> s11 = p(singeltonMap("x", TRUE), singeltonMap("r", TRUE));
+        final Pair<Map<String, Boolean>, Map<String, Boolean>> s00 = p(singletonMap("x", FALSE), singletonMap("r", FALSE));
+        final Pair<Map<String, Boolean>, Map<String, Boolean>> s10 = p(singletonMap("x", TRUE), singletonMap("r", FALSE));
+        final Pair<Map<String, Boolean>, Map<String, Boolean>> s01 = p(singletonMap("x", FALSE), singletonMap("r", TRUE));
+        final Pair<Map<String, Boolean>, Map<String, Boolean>> s11 = p(singletonMap("x", TRUE), singletonMap("r", TRUE));
 
         assertEquals(set(s00, s10, s01, s11), ts.getStates());
 
         assertEquals(set(s00, s10), ts.getInitialStates());
 
-        assertEquals(set(singeltonMap("x", TRUE), singeltonMap("x", FALSE)), ts.getActions());
+        assertEquals(set(singletonMap("x", TRUE), singletonMap("x", FALSE)), ts.getActions());
 
         assertEquals(set("r", "x", "y"), ts.getAtomicPropositions());
 
@@ -55,14 +55,14 @@ public class CircuitTest {
 
         assertEquals(set("y"), ts.getLabel(s00));
 
-        assertEquals(set(transition(s00, singeltonMap("x", false), s00),
-                transition(s00, singeltonMap("x", true), s10),
-                transition(s10, singeltonMap("x", false), s01),
-                transition(s10, singeltonMap("x", true), s11),
-                transition(s01, singeltonMap("x", false), s01),
-                transition(s01, singeltonMap("x", true), s11),
-                transition(s11, singeltonMap("x", false), s01),
-                transition(s11, singeltonMap("x", true), s11)
+        assertEquals(set(transition(s00, singletonMap("x", false), s00),
+                transition(s00, singletonMap("x", true), s10),
+                transition(s10, singletonMap("x", false), s01),
+                transition(s10, singletonMap("x", true), s11),
+                transition(s01, singletonMap("x", false), s01),
+                transition(s01, singletonMap("x", true), s11),
+                transition(s11, singletonMap("x", false), s01),
+                transition(s11, singletonMap("x", true), s11)
         ),
                 ts.getTransitions());
 

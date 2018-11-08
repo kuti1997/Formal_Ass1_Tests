@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex3;
+package il.ac.bgu.cs.fvm.ex2;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
 import static org.junit.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex3;
+package il.ac.bgu.cs.fvm.ex2;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.seq;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
@@ -45,7 +45,7 @@ public class VerificationTests {
 		ts.addAtomicProposition("i<3");
 		IntStream.range(0, 3).forEach(i -> ts.addToLabel(i, "i<3"));
 
-		ts.addInitialState(3);
+		ts.setInitial(3, true);
 
 		ts.addAction("dec");
 		ts.addAction("inc");

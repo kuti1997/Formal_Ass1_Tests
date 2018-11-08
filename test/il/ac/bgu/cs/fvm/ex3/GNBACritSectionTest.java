@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex4;
+package il.ac.bgu.cs.fvm.ex3;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
 import static java.util.Arrays.asList;
@@ -22,21 +22,21 @@ public class GNBACritSectionTest {
 
 		MultiColorAutomaton<String, String> mulAut = getMCAut();
 		Automaton<?, String> aut = fvmFacadeImpl.GNBA2NBA(mulAut);
-		assertEquals(aut, getExpected());
+		assertEquals(getExpected(), aut);
 
 	}
 
 	MultiColorAutomaton<String, String> getMCAut() {
-		MultiColorAutomaton<String, String> aut = new MultiColorAutomaton<String, String>();
+		MultiColorAutomaton<String, String> aut = new MultiColorAutomaton<>();
 
 		aut.addTransition("s0", set("crit2"), "s2");
 		aut.addTransition("s0", set("crit1"), "s1");
 
 		// True transitions
 		for (Set<String> s : Util.powerSet(set("crit1", "crit2"))) {
-			aut.addTransition("s0", new HashSet<String>(s), "s0");
-			aut.addTransition("s1", new HashSet<String>(s), "s0");
-			aut.addTransition("s2", new HashSet<String>(s), "s0");
+			aut.addTransition("s0", new HashSet<>(s), "s0");
+			aut.addTransition("s1", new HashSet<>(s), "s0");
+			aut.addTransition("s2", new HashSet<>(s), "s0");
 		}
 
 		aut.setInitial("s0");

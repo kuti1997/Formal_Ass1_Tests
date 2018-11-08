@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex3;
+package il.ac.bgu.cs.fvm.ex2;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
@@ -82,7 +82,7 @@ public class AutTsProductTests2 {
 		ts.addState(yl);
 		ts.addState(rd);
 		ts.addState(ry);
-		ts.addInitialState(gr);
+		ts.setInitial(gr, true);
 
 		String sw = "switch";
 		ts.addAction(sw);

@@ -1,11 +1,11 @@
-package il.ac.bgu.cs.fvm.ex3;
+package il.ac.bgu.cs.fvm.ex2;
 
-import static il.ac.bgu.cs.fvm.ex3.AutomatonTest.State.A;
-import static il.ac.bgu.cs.fvm.ex3.AutomatonTest.State.B;
-import static il.ac.bgu.cs.fvm.ex3.AutomatonTest.State.C;
-import static il.ac.bgu.cs.fvm.ex3.AutomatonTest.State.D;
-import static il.ac.bgu.cs.fvm.ex3.AutomatonTest.State.G;
-import static il.ac.bgu.cs.fvm.ex3.AutomatonTest.State.H;
+import static il.ac.bgu.cs.fvm.ex2.AutomatonTest.State.A;
+import static il.ac.bgu.cs.fvm.ex2.AutomatonTest.State.B;
+import static il.ac.bgu.cs.fvm.ex2.AutomatonTest.State.C;
+import static il.ac.bgu.cs.fvm.ex2.AutomatonTest.State.D;
+import static il.ac.bgu.cs.fvm.ex2.AutomatonTest.State.G;
+import static il.ac.bgu.cs.fvm.ex2.AutomatonTest.State.H;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.set;
 import static org.junit.Assert.assertEquals;
 

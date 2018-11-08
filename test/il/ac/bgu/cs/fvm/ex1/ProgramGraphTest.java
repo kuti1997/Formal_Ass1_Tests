@@ -1,4 +1,4 @@
-package il.ac.bgu.cs.fvm.ex2;
+package il.ac.bgu.cs.fvm.ex1;
 
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.map;
 import static il.ac.bgu.cs.fvm.util.CollectionHelper.p;
@@ -41,7 +41,7 @@ public class ProgramGraphTest {
 		pg.addLocation(l1);
 		pg.addLocation(l2);
 
-		pg.addInitialLocation(l1);
+		pg.setInitial(l1, true);
 
 		Set<ActionDef> effect = new HashSet<>();
 		effect.add(new ParserBasedActDef());
@@ -49,8 +49,8 @@ public class ProgramGraphTest {
 		Set<ConditionDef> cond = new HashSet<>();
 		cond.add(new ParserBasedCondDef());
 
-		pg.addTransition(new PGTransition<String, String>(l1, "x>z", "x:=(x+y) % 5", l2));
-		pg.addTransition(new PGTransition<String, String>(l2, "", "z:=(z-y) % 5", l1));
+		pg.addTransition(new PGTransition<>(l1, "x>z", "x:=(x+y) % 5", l2));
+		pg.addTransition(new PGTransition<>(l2, "", "z:=(z-y) % 5", l1));
 
 		pg.addInitalization(asList("x:=1", "y:=2", "z:=0"));
 
@@ -272,7 +272,7 @@ public class ProgramGraphTest {
 		ProgramGraph<String, String> pg = fvmFacadeImpl.createProgramGraph();
 
 		pg.addLocation("S");
-		pg.addInitialLocation("S");
+		pg.setInitial("S", true);
 
 		Set<ActionDef> effect = set(new ParserBasedActDef());
 		Set<ConditionDef> cond = set(new ParserBasedCondDef());

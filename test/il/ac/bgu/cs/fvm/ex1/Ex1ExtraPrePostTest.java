@@ -30,7 +30,7 @@ public class Ex1ExtraPrePostTest {
     public void testActionPostSingleStateNoTransitions() throws Exception {
         TransitionSystem<Integer, String, Integer> ts = sut.createTransitionSystem();
         ts.addState(1);
-        ts.addInitialState(1);
+        ts.setInitial(1, true);
         ts.addAction("a1");
         
         assertEquals( set(), sut.post(ts, 1, "a1") );
@@ -40,7 +40,7 @@ public class Ex1ExtraPrePostTest {
     public void testPostSingleStateNoTransitions() throws Exception {
         TransitionSystem<Integer, String, Integer> ts = sut.createTransitionSystem();
         ts.addState(1);
-        ts.addInitialState(1);
+        ts.setInitial(1, true);
         ts.addAction("a1");
         
         assertEquals(set(), sut.post(ts, 1) );
@@ -50,7 +50,7 @@ public class Ex1ExtraPrePostTest {
     public void testActionPostSingleStateSingleTransition() throws Exception {
         TransitionSystem<Integer, String, Integer> ts = sut.createTransitionSystem();
         ts.addState( 1 );
-        ts.addInitialState( 1 );
+        ts.setInitial(1, true);
         ts.addAction("a1");
         
         ts.addTransitionFrom(1).action("a1").to(1);
@@ -62,7 +62,7 @@ public class Ex1ExtraPrePostTest {
     public void testPostSingleStateSingleTransition() throws Exception {
         TransitionSystem<Integer, String, Integer> ts = sut.createTransitionSystem();
         ts.addState(1);
-        ts.addInitialState(1);
+        ts.setInitial(1, true);
         ts.addAction("a1");
         
         ts.addTransitionFrom(1).action("a1").to(1);
@@ -125,6 +125,6 @@ public class Ex1ExtraPrePostTest {
     @Test(timeout = 2000)
     public void testActionPreSingle() {
         assertEquals( set(1), sut.pre(makeLinearTs(3), 2, "a1") );
-        assertEquals( set(),     sut.pre(makeLinearTs(3), 2, "a2") );
+        assertEquals( set(),  sut.pre(makeLinearTs(3), 2, "a2") );
     }
 }
